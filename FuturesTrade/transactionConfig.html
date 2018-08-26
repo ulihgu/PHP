@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="css/mystyle.css" />
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <title>智能投顾</title>
+</head>
+
+<body>
+  <nav class="navbar navbar-default">
+    <div class="container-fluid">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
+          aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="index.html">首页</a>
+      </div>
+
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+          <li class="active">
+            <a href="dayIntroduction.html">当日计划
+              <span class="sr-only">(current)</span>
+            </a>
+          </li>
+          <li>
+            <a href="#">最新资讯</a>
+          </li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">管理工具
+              <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+              <li>
+                <a href="#">交易配置</a>
+              </li>
+              <li>
+                <a href="#">库存明细</a>
+              </li>
+              <li>
+                <a href="#">收支明细</a>
+              </li>
+              <li role="separator" class="divider"></li>
+              <li>
+                <a href="#">成交记录</a>
+              </li>
+              <li role="separator" class="divider"></li>
+              <li>
+                <a href="#">重要信息</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+        <form class="navbar-form navbar-right">
+          <div class="form-group">
+            <input type="text" class="form-control" placeholder="Search">
+          </div>
+          <button type="submit" class="btn btn-default">查询</button>
+        </form>
+        <ul class="nav navbar-nav navbar-right">
+          <li>
+            <a href="loging.html">登录/注册</a>
+          </li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">个人信息
+              <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+              <li>
+                <a href="#">个人设置</a>
+              </li>
+              <li>
+                <a href="#">消息</a>
+              </li>
+              <li>
+                <a href="#">支付明细</a>
+              </li>
+              <li role="separator" class="divider"></li>
+              <li>
+                <a href="#">退出</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+      <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container-fluid -->
+  </nav>
+   <div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-1">
+      <img src="image/log.jpg" alt="">      
+    </div>
+    <div class="col-md-1">          
+    </div>    
+    <div class="col-md-1">
+    </div>
+    <div class="col-md-5">
+        <h1>智能投顾-交易配置</h1> 
+        <p class="">
+            以人工智能为核心的智能投顾在全球爆发，机器人替用户理财成为一大热点，通过数字化平台，提升理财金融服务效率。
+         </p>
+         <form class="form-inline" action="">
+            <div class="form-group">
+              <label class="sr-only" for="exampleInputAmount">点数 (in dollars)</label>
+              <div class="input-group">
+                <div class="input-group-addon">点 $</div>
+                <input name="point" type="text" class="form-control" id="exampleInputAmount" placeholder="Amount">
+                <div class="input-group-addon">.00</div>
+              </div>
+            </div>
+            <div class="form-group">
+                <label class="sr-only" for="exampleInputAmount">手 (in dollars)</label>
+                <div class="input-group">
+                  <div class="input-group-addon">量 +</div>
+                  <input name="number" type="text" class="form-control" id="exampleInputAmount" placeholder="Amount">
+                  <div class="input-group-addon">.00</div>
+                </div>
+              </div><br>
+            <button id="inputDate1" type="text" class="btn btn-primary">执行操作</button>
+            
+          </form>
+          <input id="inputDate" type="button" value="点我数据交互"/>
+    </div>
+    <div class="col-md-1"></div>
+    <div class="col-md-1">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-2"> 
+        <h1>
+            你好！
+          </h1>    
+    </div>     
+  </div>
+  <div class="row">
+    <div class="col-md-8"></div>
+  </div> 
+  <script src="js/jquery-3.3.1.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>  
+  <script src="js/tools.js"></script>
+  
+  
+</body>
+
+</html>

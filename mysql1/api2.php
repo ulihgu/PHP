@@ -1,4 +1,5 @@
 <?php
+    #查询数据库
     function insertData($sql)
     {
         //连接数据库phpbos\mysql1\api.php
@@ -27,7 +28,7 @@
      VALUES (NULL, '测试1', 'wu', '55555555@msn.com', '北京昌平区', '北京', '朱X庄');
     ";
     //insertData($sql);
-
+    #更新数据库
     function updateData($sql)
     {
         //连接数据库phpbos\mysql1\api.php
@@ -56,7 +57,7 @@
     $sql = "UPDATE `customers` SET `firstName`='修改1',`lastName`='吴' WHERE id= 4 ";
 
     //updateData($sql);
-
+     #删除数据库内数据
     function deleteData($sql)
     {
         //连接数据库phpbos\mysql1\api.php
@@ -82,5 +83,5 @@
         $mysqli->close();
     }
     $sql = "DELETE FROM customers WHERE id =5";
-    deleteData($sql);
+    //deleteData($sql);
 ?>
