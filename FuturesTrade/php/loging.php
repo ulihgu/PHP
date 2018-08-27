@@ -49,10 +49,10 @@
                //$data = array($result);
            }else{
             $dbcon = null;
-            $data = array("数据连接失败！");
+            //$data = array("数据连接失败！");
            }
        }catch(PDOException $e){
-        $data = array("数据连接失败！");
+        //$data = array("数据连接失败！");
        }
        echo json_encode($result);
     }

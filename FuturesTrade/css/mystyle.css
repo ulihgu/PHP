@@ -1,3 +1,32 @@
 *{
     margin: 0px;
 }
+
+.login-item input{
+    width: 300px;
+    height: 40px;
+}
+
+.login-item a{
+    width: 300px;
+    height: 40px;
+    background-color: #f40;
+    display: block;
+    text-align: center;
+    line-height: 50px;
+    color: #fff;
+    font-size: 20px;
+}
+.login-item{
+    margin-top: 25px;
+    margin-left: 25px;
+}
+
+#loginbox{
+    width: 350px;
+    height: 280px; 
+    display: none;
+}
+h3{
+    margin-left:25px;
+}
