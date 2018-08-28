@@ -9,22 +9,7 @@
     if (isset($_REQUEST['hemail'])) {
         $email = $_REQUEST['hemail'];
         //echo $email;
-    }
-    //查询数据接收到的EMAIL名称 
-        /* if($email =='ulihgu@msn.com') {
-            $data = Array(
-                'email' =>$email,
-                'password'=>$password,
-            ) ;
-        }else{
-            $data = array('没有查询到相关数据');
-        } */
-
-    //存储到SESSION中
-    //session_start(); # 如果不执行些方法，不能使用SESSION
-    //$_SESSION["email"] = $email;
-    //$_SESSION["possword"] =$password;
-
+    }  
     //header("Location:../index.html");
 
     //登录查看用户输入的数据是否存在phpbos\FuturesTrade\php\login.php
@@ -45,14 +30,23 @@
                $stmt->execute();
                $result = $stmt->fetchAll(PDO::FETCH_OBJ);
                //$row_count = $stmt->rowCount();
+               //$data = array($result);               
 
-               //$data = array($result);
            }else{
             $dbcon = null;
             //$data = array("数据连接失败！");
            }
        }catch(PDOException $e){
         //$data = array("数据连接失败！");
+       }
+       if(!empty($result)){
+           //存储到SESSION中
+           /* session_start(); // 如果不执行些方法，不能使用SESSION
+           $_SESSION['email'] = $email;
+           $_SESSION['name'] = $password; */
+           //存储到COOKIE
+           setcookie('email',$email);
+           //var_dump($_COOKIE);          
        }
        echo json_encode($result);
     }

@@ -66,9 +66,11 @@ function loginFun() {
                     var na = d.map(function(v){
                        //console.log("名称："+v.user +" 邮箱："+v.email+" 城市："+v.city)
                         //$("h3").html("名称1："+v.user +" 邮箱2："+v.email+" 城市3："+v.city); 
-                        var name = "退出："+v.user;
-                       // $("h3").html(name); 
-                        document.getElementById("loginout").innerHTML = name;
+                        var name = "欢迎！"+v.user;
+                        //$("h3").html(name); 
+                        //document.getElementById("loginout").innerHTML = name;
+                        window.parent.document.getElementById("loginreg").innerText=name;
+                        $("#loginreg").removeAttr("onclick");
                         layer.close(layer.index);
                     });    
                 }     
