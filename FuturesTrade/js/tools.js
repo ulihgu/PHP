@@ -14,7 +14,7 @@ $("#loging————").click(function () {
             d = JSON.parse(date);
             console.log(d);
             if(d.length == 0){               
-                $("h3").html("没有查询到登录用户!");
+                $("h3").html("没有查询到登录用户!");               
             }else{
                 //$("h1").html(d.email +d.password);               
                 var na = d.map(function(v){
@@ -33,7 +33,7 @@ function showLogin() {
         title:"用户密码登录",
         erea:["350px","300px"],
         skin:'layui-layer-rim',
-        content:$("#loginbox")
+        content:$("#loginbox")        
     });
 }
 //登录判断用户输入
@@ -65,7 +65,11 @@ function loginFun() {
                 }else{           
                     var na = d.map(function(v){
                        //console.log("名称："+v.user +" 邮箱："+v.email+" 城市："+v.city)
-                        $("h3").html("名称："+v.user +" 邮箱："+v.email+" 城市："+v.city); 
+                        //$("h3").html("名称1："+v.user +" 邮箱2："+v.email+" 城市3："+v.city); 
+                        var name = "退出："+v.user;
+                       // $("h3").html(name); 
+                        document.getElementById("loginout").innerHTML = name;
+                        layer.close(layer.index);
                     });    
                 }     
             }

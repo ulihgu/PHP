@@ -1,5 +1,6 @@
 *{
     margin: 0px;
+    font-family: Arial;
 }
 
 .login-item input{
@@ -29,4 +30,9 @@
 }
 h3{
     margin-left:25px;
+}
+
+#bs-example-navbar-collapse-1{
+    margin-left: 10%;
+    margin-right: 10%;
 }
