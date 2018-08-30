@@ -4,12 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>添加用户</title>
 
 </head>
 <body>
+<center>
     <div>
-    <h3>添加用户</h3>
+    <h1>添加用户</h1>
         <hr>
        <form action="insert.php" method='post'>
            <p>用户名</p>
@@ -22,7 +23,7 @@
            </p>
        </form>
     </div>
-        
+</center>
 
 </body>
 </html>
