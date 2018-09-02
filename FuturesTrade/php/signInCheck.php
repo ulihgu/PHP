@@ -18,9 +18,7 @@
     //处理密码方法
     function sanitizeFormPassword($inputText){
         return $inputText;
-    }
-    
-         
+    }     
     if (isset($_REQUEST['hemail'])) {
         $email = sanitizeFormEmail($_REQUEST['hemail']);
     } 

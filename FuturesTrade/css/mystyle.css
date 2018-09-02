@@ -5,7 +5,7 @@
 
 .login-item input{
     width: 300px;
-    height: 40px;
+    height: 30px;
 }
 
 .login-item a{
@@ -14,7 +14,7 @@
     background-color: #f40;
     display: block;
     text-align: center;
-    line-height: 50px;
+    line-height: 40px;
     color: #fff;
     font-size: 20px;
 }
@@ -35,4 +35,18 @@ h3{
 #bs-example-navbar-collapse-1{
     margin-left: 10%;
     margin-right: 10%;
+}
+
+/* 首页配置 */
+/* .txdw{
+    text-align:center;    
+} */
+legend{
+    text-align:center;
+}
+.desc{
+    text-align:center;
+}
+input{
+    text-align:center;
 }
