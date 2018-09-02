@@ -24,14 +24,17 @@ signup_in.addEventListener('click', function(){
                 jsdata = JSON.parse(jsdata); 
                 //打印收到数据              
                 console.log(jsdata);
-                //console.log(jsdata[0]);
+                console.log(jsdata[0]);
                 //判断注册信息
-                if(jsdata[0]==null){               
+                if(jsdata[0]==null ||jsdata[0].length==0){               
                     //signInInester();  //单独执行插入
                     layer.alert("用户注册成功！",{
                         title:"注册成功！",
                         icon:1
                        });  
+                       setCookie("c_name",husername,5);
+                       window.location.href="index.html"
+                       console.log("注册完成");
                 }else{
                     //取错误信息        
                 var err;        
@@ -47,6 +50,13 @@ signup_in.addEventListener('click', function(){
         });
     }
 },false);
+//设置setCOOKIE
+function setCookie(c_name, value, expiredays) {
+    var exdate = new Date();
+    exdate.setTime(exdate.getTime()*expiredays*60*1000);
+    document.cookie=c_name+"="+escape(value)+
+            ((expiredays==null) ? "":";expires="+exdate.toGMTString());
+}
 //开始插入注册数据
 function signInInsert(){
     $.ajax({
