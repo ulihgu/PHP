@@ -1,6 +1,4 @@
 <?php
-   // $password = "";
-   // $email = "";
    ini_set("error_reporting",E_ALL ^ E_NOTICE);
     if (isset($_REQUEST['hpassword'])) {
         $password = $_REQUEST['hpassword'];
@@ -45,8 +43,7 @@
            $_SESSION['email'] = $email;
            $_SESSION['name'] = $password; */
            //存储到COOKIE
-           setcookie('email',$email);
-           //var_dump($_COOKIE);          
+           //setcookie('email',$email);     
        }
        echo json_encode($result);
     }
