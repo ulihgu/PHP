@@ -62,10 +62,10 @@ function loginFun() {
     }
 }
 /////////////////////////弹出窗口-点击注册-切换到注册页--------------O
-function signUp() {
+/* function signUp() {
     //console.log("点击注册");
     window.location.href="signup.html" 
-}
+} */
 
 /////////////////////index.html-中“退出”执行--------------O
 var jExit = document.getElementById("hExit");

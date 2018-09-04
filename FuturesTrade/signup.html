@@ -22,12 +22,12 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-       
+
       </div>
 
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-          <a class="navbar-brand" href="signup.html">首页</a>
+        <a class="navbar-brand" href="index.html">首页</a>
         <ul class="nav navbar-nav">
           <li class="active">
             <a href="dayIntroduction.html">当日计划
@@ -64,9 +64,9 @@
         </ul>
 
         <ul class="nav navbar-nav navbar-right">
-          <li>             
+          <li>
             <a id="loginreg" href="#" onclick="showLogin()">登录/注册</a>
-          </li>          
+          </li>
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">个人信息
               <span class="caret"></span>
@@ -99,49 +99,49 @@
       <div class="col-md-4"></div>
       <div class="div1 col-md-4">
         <!-- <form class="form-horizontal" method="POST" action="php/loging.php"> -->
-          <form class="form-horizontal"></form>
+        <form class="form-horizontal">
           <fieldset>
-            <legend> <h1>注册用户</h1> </legend>
+            <legend>
+              <h1>注册用户</h1>
+            </legend>
             <div class="form-group">
               <label for="exampleInputEmail">油箱地址：</label>
-              <input type="email" class="form-control" id="exampleInputEmail" aria-describedby="exampleInputEmail" placeholder="Enter email" >
+              <input type="email" class="form-control" id="exampleInputEmail" aria-describedby="exampleInputEmail" placeholder="Enter email">
               <small id="emailHelp" class="form-text text-muted">我们永远不会与其他人分享你的电子邮件。</small>
             </div>
             <div class="form-group">
               <label for="userNameText">昵称：</label>
-              <input type="text" class="form-control" id="userName" aria-describedby="userNameText" placeholder="Enter Name" >
+              <input type="text" class="form-control" id="userName" aria-describedby="userNameText" placeholder="Enter Name">
             </div>
             <div class="form-group">
               <label for="exampleInputPassword1">输入密码：</label>
               <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password1">
-            </div>  
+            </div>
             <div class="form-group">
               <label for="exampleInputPassword2">确认密码：</label>
               <input type="password" class="form-control" id="exampleInputPassword2" placeholder="Password2">
-            </div>             
+            </div>
           </fieldset>
           <!-- <button id="inputDate" type="submit" class="btn btn-primary">登 录</button> -->
           <div class="form-group">
             <a type="text" class="btn btn-primary form-control" id="signup_in">注 册</a>
-          </div>         
-          </form>
+          </div>
+        </form>
         <h3></h3>
       </div>
     </div>
   </div>
 
   <div id="loginbox" class="form-group">
-    <div class="login-item "><input type="type" id="textUserName" placeholder="油箱"/></div>
-    <div class="login-item "><input type="password" id="textPassword" placeholder="密码"/></div>
+    <div class="login-item "><input type="type" id="textUserName" placeholder="油箱" /></div>
+    <div class="login-item "><input type="password" id="textPassword" placeholder="密码" /></div>
     <div class="login-item "><a id="loging" href="javascript:;" onclick="loginFun()">登录</a></div>
-  </div>  
-
+  </div>
   <script src="js/jquery-3.3.1.min.js"></script>
-  <script src="js/bootstrap.min.js"></script>
   <script src="js/layer.js"></script>
+  <script src="js/bootstrap.min.js"></script>
   <script src="js/tools.js"></script>
   <script src="js/signIn.js"></script>
-
 </body>
 
 </html>

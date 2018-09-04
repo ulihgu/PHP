@@ -1,10 +1,9 @@
 <?php
     ini_set("error_reporting",E_ALL ^ E_NOTICE);
     include("Accout.php");    
-    include("mySqlData.php");
-    #\phpbos\FuturesTrade\php\signInCheck.php
-    
-   //处理用户名
+    //include("mySqlData.php");
+    //localhost/phpbos/FuturesTrade/php/signInCheck.php
+    //处理用户名
     function sanitizeFormUsername($inputText){
         $inputText = str_replace(" ","",$inputText);
         $inputText = ucfirst(strtolower($inputText));//首字母大写，其它小写
@@ -37,14 +36,19 @@
     //$arrs = Array('error' =>'错误:邮箱地址不合法！2','name'=>$name,'email'=>$email,'password'=>$password1);
     $arrs = array($accout->register($name,$email,$password1,$password2));
     //判断是否报错：TRUE没有错误 执行插入数据库 FALSE:返回错误信息。
-    if($arrs[0]==null)
-    {
-        //$arrs = array('error' =>'正常:没有问题！');
-        $mysql_in = new MySqlData();
-        $sql = "INSERT INTO account(user,password,email)VALUES('{$name}','{$password1}','{$email}')";       
-        $arrs = array($mysql_in->insertData($sql));
-        echo json_encode($arrs);
-    }else{       
-        echo json_encode($arrs);
-    }
+    try{
+        if($arrs[0]==null)
+        {
+            //$mysql_in = new MySqlData();
+            $sql = "INSERT INTO account(user,password,email)VALUES('{$name}','{$password1}','{$email}')";       
+            //$arrs = array($mysql_in->insertData($sql));
+            //$arrs = Array('error' =>'正常:没有问题！');
+            //$arrs = array($arrs); 
+        }
+    }catch(PDOException $e){
+        //$arrs = Array('error' =>'错误:插入语法错误！EXP');
+        //$arrs = array($arrs); 
+    } 
+   
+    echo json_encode($arrs);
 ?>
