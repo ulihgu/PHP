@@ -29,28 +29,28 @@
                         //存储到COOKIE
                         //setcookie('email',$email)
                         //$this->$errorArray = Array('error' =>null);
+                        $this->$errorArray = array('error' => '正常:注册用户成功！','state'=>'OK');
                     } else {
-                        $this->$errorArray = array('error' => '错误:注册用户失败！');
-                    }
-
-                    return $this->$errorArray;
+                        $this->$errorArray = array('error' => '错误:注册用户失败！','state'=>'NO');
+                    }                    
                 } else {
                     //$sqlConnect = null;//现在运行完成，在此关闭连接
-                    $this->$errorArray = array('error' => '错误:连接数据库失败！');
+                    $this->$errorArray = array('error' => '错误:连接数据库失败！','state'=>'NO');
                 }
             } catch (PDOException $e) {
-                $this->$errorArray = array('error' => '错误:注册用户失败！');
+                $this->$errorArray = array('error' => '错误:注册用户失败！','state'=>'NO');
             }
             $sqlConnect = null; //现在运行完成，在此关闭连接
+            return $this->$errorArray;
         }
 
         public function modifyData($sql)
         {
-            $this->$errorArray = array('error' => '错误:注册用户失败！');
+            $this->$errorArray = array('error' => '错误:注册用户失败！','state'=>'NO');
         }
 
         public function deleteData($sql)
         {
-            $this->$errorArray = array('error' => '错误:注册用户失败！');
+            $this->$errorArray = array('error' => '错误:注册用户失败！','state'=>'NO');
         }
     }

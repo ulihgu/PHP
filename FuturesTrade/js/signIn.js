@@ -6,10 +6,9 @@ signup_in.addEventListener('click', function () {
     var hpassword1 = $.trim($("#exampleInputPassword1").val());
     var hpassword2 = $.trim($("#exampleInputPassword2").val());
     var husername = $.trim($("#userName").val());
-    console.log("油箱："+hemail+"密码:"+hpassword1+"用户名"+husername);
     if (hemail == "" || hpassword1 == "" || hpassword2 == "" || husername == "") {
-        layer.alert("用户密码不能为空！", {
-            title: "用户密码登录！",
+        layer.alert("请填写正确,不能有空！", {
+            title: "注册失败！",
             icon: 5
         });
      } else{
@@ -19,25 +18,22 @@ signup_in.addEventListener('click', function () {
             data:{'hemail':hemail,'husername':husername,'hpassword1':hpassword1,'hpassword2':hpassword2},
             //成功接收到数据后触发        
             success: function (date) {
-                console.log(date);
                 date = JSON.parse(date);
                 //打印收到数据              
                 console.log(date);
-                console.log(date[0]);
-                console.log(date['state']);
                 //判断注册信息
                  if (date['state']=='OK') {
-                    //signInInester();  //单独执行插入
                     layer.alert("用户注册成功！", {
                         title: "注册成功！",
                         icon: 1
                     });
-                    //setCookie("c_name", husername, 5);
-                    //window.location.href="index.html"
+                    setCookie("c_name", husername, 5);
+                    window.location.href="index.html"
                     console.log("注册完成");
                 } else {
-                    //取错误信息        
-                    layer.alert(date['error'], {
+                    //取错误信息
+                    console.log("date[error]:"+date['error']);   
+                    layer.alert("失败_"+date['error'], {
                         title: "注册失败！",
                         icon: 2
                     });

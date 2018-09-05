@@ -2,7 +2,7 @@
     //ini_set('error_reporting', E_ALL ^ E_NOTICE);
     #C:\xampp\htdocs\phpbos\FuturesTrade\php\Accout.php
     class myAccout{
-        private $errorArray;
+        private $errorArray = array('error' => 'Normal: no mistake.','state'=>'OK');
         private $name;
         private $email;
         private $password1;
@@ -14,15 +14,22 @@
             $this->email = $email;
             $this->password1 = $password1;
             $this->password2 = $password2;
-            $this->errorArray = array('error' => 'Normal: no mistake.','state'=>'OK');
         }
 
         //给外部公共方法
+        public function printname()
+        {
+            //array('error' => 'Normal: no mistake.','state'=>'OK');
+            //array_push($this->errorArray,"收到了");
+            //$errorArray = array('error' => 'printname: no mistake.','state'=>'OK');
+            validateUsername();
+            return $errorArray;
+        }
         public function register()
         {
-            //validateUsername();
-            //validateEmail();
-            //validatePassword();
+            validateUsername();
+            validateEmail();
+            validatePassword();
             return $errorArray;
         }
 
@@ -56,7 +63,7 @@
             }
             if (preg_match('/[^A-Za-z0-9]/', $password1)) {
                 //array_push($this->errorArray,'密码只能是数字和字母组成！');
-                $errorArray = Array('error' => '错误:密码只能是数字和字母组成！');
+                $errorArray = array('error' => '错误:密码只能是数字和字母组成！');
                 return;
             }
 
@@ -66,3 +73,4 @@
             }
         }
     }
+?>
