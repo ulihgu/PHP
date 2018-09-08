@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html>
-    
+<html>    
     <head>
         <meta charset="utf-8">
         <title>
@@ -9,40 +8,38 @@
         <meta name="renderer" content="webkit">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-        <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+        <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black">
         <meta name="apple-mobile-web-app-capable" content="yes">
         <meta name="format-detection" content="telephone=no">
-        <link rel="stylesheet" href="css/x-admin.css" media="all">
-        <link rel="stylesheet" href="lib/layui/css/layui.css" media="all">
-        <script src="lib/layui/layui.js" charset="utf-8"></script>
+        <link rel="stylesheet" href="./css/x-admin.css" media="all">
+        <script src="./lib/layui/layui.js" charset="utf-8"></script>
     </head>
     
     <body style="background-color: #393D49">
         <div class="x-box">
             <div class="x-top">
-                <i class="layui-icon x-login-close">
+                <!-- <i class="layui-icon x-login-close">
                     &#x1007;
-                </i>
+                </i> -->
+                <img class="myimgcl" src="./images/gb.png" alt="">
                 <ul class="x-login-right">
                     <li style="background-color: #F1C85F;" color="#F1C85F">
                     </li>
                     <li style="background-color: #EA569A;" color="#EA569A">
                     </li>
                     <li style="background-color: #393D49;" color="#393D49">
-                    </li>
+                    </li>                  
                 </ul>
             </div>
             <div class="x-mid">
                 <div class="x-avtar">
-                    <img src="./images/logo.png" alt="">
+                    <img src="./images/logo.gif" alt="">
                 </div>
                 <div class="input">
                     <form class="layui-form">
                         <div class="layui-form-item x-login-box">
-                            <label for="username" class="layui-form-label">
-                                <i class="layui-icon">&#xe612;</i>
-                            </label>
+                            <label for="username" class="layui-form-label"><img class="myimg" src="images/user.png" alt=""></label>
                             <div class="layui-input-inline">
                                 <input type="text" id="username" name="username" required="" lay-verify="username"
                                 autocomplete="off" placeholder="username" class="layui-input">
@@ -50,7 +47,7 @@
                         </div>
                         <div class="layui-form-item x-login-box">
                             <label for="pass" class="layui-form-label">
-                                <i class="layui-icon">&#xe628;</i>
+                                <img class="myimg" src="./images/pass.png" alt="">
                             </label>
                             <div class="layui-input-inline">
                                 <input type="password" id="pass" name="pass" required="" lay-verify="pass"
@@ -93,7 +90,6 @@
                 });
 
             });
-
         </script>
     </body>
 

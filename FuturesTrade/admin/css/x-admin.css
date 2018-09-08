@@ -459,5 +459,14 @@ body .site-demo-nav .layui-nav-item{line-height: 40px}
   .layui-nav .x-index{display: none;}
 }
 
-
+.myimg{
+  width:30px;
+  height: 25px;
+}
+.myimgcl{
+  width:30px;
+  height: 25px;
+  margin-left: 10px;
+  margin-top: 15px;
+}
 

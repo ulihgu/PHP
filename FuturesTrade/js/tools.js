@@ -30,7 +30,7 @@ function loginFun() {
         $.ajax({
             //发送类型
             type: "POST",
-            url: "php/loging.php",
+            url: "./php/loging.php",
             //发送数据
             data:{'hemail':hemail,'hpassword':hpassword},
             //成功接收到数据后触发        
@@ -49,12 +49,12 @@ function loginFun() {
                        //console.log("名称："+v.user +" 邮箱："+v.email+" 城市："+v.city)
                         //$("h3").html("名称1："+v.user +" 邮箱2："+v.email+" 城市3："+v.city); 
                         //document.getElementById("loginout").innerHTML = name;
-                        window.parent.document.getElementById("loginreg").innerText="欢迎！"+v.user;
+                        //window.parent.document.getElementById("loginreg").innerText="欢迎！"+v.user;
                         $("#loginreg").removeAttr("onclick");
                         layer.close(layer.index);
                        //setCookie(scemail,v.email,5);
                         setCookie("c_name",v.user,5);
-                        window.location.href="index.html" 
+                        window.location.href="./index.html" 
                     });    
                 }     
             }
