@@ -59,3 +59,29 @@ layui.use(['element'], function(){
   });
 });
 
+/////////////////////////////////////////检查admSESSION是否登录过--------------O
+function admchecKsession() {
+    $.ajax({
+        //发送类型
+        type: "POST",
+        url: "./php/admlock.php",
+        //发送数据
+        //data:{'hemail':hemail,'hpassword':hpassword},
+        //成功接收到数据后触发        
+        success: function (date) {
+            date = JSON.parse(date);
+            //打印收到数据              
+            console.log(date);
+            //判断注册信息
+             if (date['state']=='OK') {
+                var username = date['username'];
+                document.getElementById("admin_name").innerText=username;
+                console.log("登录成功");
+            } else {
+				//取错误信息
+				window.location.href="../home/login.html" ;
+                //console.log("date[error]:"+date['error']);   
+            }  
+        }
+    });
+}

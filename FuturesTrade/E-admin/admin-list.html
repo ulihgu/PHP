@@ -11,9 +11,9 @@
         <meta name="apple-mobile-web-app-status-bar-style" content="black">
         <meta name="apple-mobile-web-app-capable" content="yes">
         <meta name="format-detection" content="telephone=no">
-        <link rel="stylesheet" href="./css/x-admin.css" media="all">
+        <link rel="stylesheet" href="css/x-admin.css" media="all">
     </head>
-    <body>
+    <body onload="adminMamagement()">
         <div class="x-nav">
             <span class="layui-breadcrumb">
               <a><cite>首页</cite></a>
@@ -37,12 +37,13 @@
                       <input type="text" name="username"  placeholder="请输入登录名" autocomplete="off" class="layui-input">
                     </div>
                     <div class="layui-input-inline" style="width:80px">
-                        <button class="layui-btn"  lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button>
+                        <!-- <button class="layui-btn"  lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button> -->
+                        <button class="layui-btn"  lay-submit="" lay-filter="sreach"><img src="images/cz.png" alt=""></button>
                     </div>
                   </div>
                 </div> 
             </form>
-            <xblock><button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon">&#xe640;</i>批量删除</button><button class="layui-btn" onclick="admin_add('添加用户','admin-add.html','600','500')"><i class="layui-icon">&#xe608;</i>添加</button><span class="x-right" style="line-height:40px">共有数据：88 条</span></xblock>
+            <xblock><button class="layui-btn layui-btn-danger" onclick="delAll()"><!-- <i class="layui-icon">&#xe640;</i> --><img src="images/del.png" alt="">批量删除</button><button class="layui-btn" onclick="admin_add('添加用户','admin-add.html','600','500')"><!-- <i class="layui-icon">&#xe608;</i> --><img src="images/add.png" alt="">添加</button><span class="x-right" style="line-height:40px">共有数据：88 条</span></xblock>
             <table class="layui-table">
                 <thead>
                     <tr>
@@ -75,7 +76,7 @@
                         </th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody class="tbodytable">
                     <tr>
                         <td>
                             <input type="checkbox" value="1" name="">
@@ -87,16 +88,16 @@
                             admin
                         </td>
                         <td >
-                            18925139194
+                            18500363515
                         </td>
                         <td >
-                            113664000@qq.com
+                            17198419@qq.com
                         </td>
                         <td >
                             超级管理员
                         </td>
                         <td>
-                            2017-01-01 11:11:42
+                            2018-01-01 11:11:42
                         </td>
                         <td class="td-status">
                             <span class="layui-btn layui-btn-normal layui-btn-mini">
@@ -124,7 +125,46 @@
         </div>
         <script src="./lib/layui/layui.js" charset="utf-8"></script>
         <script src="./js/x-layui.js" charset="utf-8"></script>
-        <script>
+        <script> 
+                function getdate(timestamp) {                  
+                    var date = new Date(parseInt(timestamp) * 1000);//时间戳为10位需*1000，时间戳为13位的话不需乘1000
+                    Y = date.getFullYear() + '-';
+                    M = (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '-';
+                    D = date.getDate() + ' ';
+                    h = date.getHours() + ':';
+                    m = date.getMinutes() + ':';
+                    s = date.getSeconds();
+                    return Y+M+D+h+m+s;
+                } 
+              function adminMamagement() {
+                   $.ajax({
+                       type:"POST",
+                       url:"php/adminMamagement.php",
+                       data:{'state':'2'},
+                       success:function(data){
+                           if(data.length>0){
+                                data = JSON.parse(data);
+                                console.log(data);
+                                data.forEach(function(x){
+                                //开始写入到表格中
+                                mytime =getdate(x.joinTime);
+                                var newtr = '<tr><td><input type="checkbox" value="1" name=""></td><td>'+x.id+'</td><td>'+x.user+'</td><td >18500363515</td><td >'+x.email+'</td><td >超级管理员</td><td>'+mytime+'</td><td class="td-status"><span class="layui-btn layui-btn-normal layui-btn-mini">已启用</span></td><td class="td-manage"><a style="text-decoration:none" onclick="admin_stop(this,"10001")" href="javascript:;" title="停用"><i class="layui-icon">&#xe601;</i></a><a title="编辑" href="javascript:;" onclick="admin_edit("编辑","admin-edit.html","4","","510")"class="ml-5" style="text-decoration:none"><i class="layui-icon">&#xe642;</i></a><a title="删除" href="javascript:;" onclick="admin_del(this,"1")"style="text-decoration:none"><i class="layui-icon">&#xe640;</i></a></td></tr>';
+                                //结束
+                                $(".tbodytable").append(newtr);
+                                 });
+                           }else{
+                            console.log(data);
+                           }                       
+                       }
+                   });
+                }
+                function clearTable() {
+                        var mybody = document.getElementById("mybody");
+                        while (mybody.childNodes.length > 0) {
+                            mybody.removeChild(mybody.childNodes[0]);
+                        }
+                    } 
+
             layui.use(['laydate','element','laypage','layer'], function(){
                 $ = layui.jquery;//jquery
               laydate = layui.laydate;//日期插件

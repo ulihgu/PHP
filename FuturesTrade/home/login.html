@@ -13,7 +13,7 @@
         <meta name="apple-mobile-web-app-capable" content="yes">
         <meta name="format-detection" content="telephone=no">
         <link rel="stylesheet" href="../css/x-admin.css" media="all">
-        <script src="../lib/layui/layui.js" charset="utf-8"></script>
+        <script src="../js/layui.js" charset="utf-8"></script>
     </head>
     
     <body style="background-color: #393D49">
@@ -22,7 +22,7 @@
                 <!-- <i class="layui-icon x-login-close">
                     &#x1007;
                 </i> -->
-                <img class="myimgcl" src="../image/gb.png" alt="">
+                <img class="myimgcl" src="../image/gb.png" alt="" onclick='window.open("../index.html")'>
                 <ul class="x-login-right">
                     <li style="background-color: #F1C85F;" color="#F1C85F">
                     </li>
@@ -37,12 +37,12 @@
                     <img src="../image/logo.gif" alt="">
                 </div>
                 <div class="input">
-                    <form class="layui-form">
+                    <form class="layui-form" action="../php/loginBackstage.php" method='POST'>
                         <div class="layui-form-item x-login-box">
                             <label for="username" class="layui-form-label"><img class="myimg" src="../image/user.png" alt=""></label>
                             <div class="layui-input-inline">
                                 <input type="text" id="username" name="username" required="" lay-verify="username"
-                                autocomplete="off" placeholder="username" class="layui-input">
+                                autocomplete="off" placeholder="user@email.com" class="layui-input">
                             </div>
                         </div>
                         <div class="layui-form-item x-login-box">
@@ -75,19 +75,30 @@
                 $('.x-login-right li').click(function(event) {
                     color = $(this).attr('color');
                     $('body').css('background-color', color);
-                });
-
+                });                
                 //监听提交
-                form.on('submit(save)',
+               /*  form.on('submit(save)',                
                 function(data) {
                     console.log(data);
-                    layer.alert(JSON.stringify(data.field), {
+                    //////////发送数据
+                    var postdata = data.field;
+                    console.log("最终的提交信息:"+JSON.stringify(postdata));
+                    $.ajax({
+                        type:"POST",
+                        url:"../php/loginBackstage.php",
+                        data:postdata,  
+                        success:function(date){
+                            console.log(date);
+                        }                     
+                    });
+                    ///////////
+                   layer.alert(JSON.stringify(data.field), {
                       title: '最终的提交信息'
                     },function  () {
-                        location.href = "E-admin/index.html";
+                        location.href = "../E-admin/index.html";
                     })
                     return false;
-                });
+                }); */
 
             });
         </script>

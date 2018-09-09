@@ -4,7 +4,7 @@
     //$_SESSION=array();
     session_destroy();
 
-    echo '<script>location="../index.html"</script>';
+    echo '<script>location="../../home/login.html"</script>';
 
     /* $name = $_SESSION("name");
     $password = $_SESSION("password"); */

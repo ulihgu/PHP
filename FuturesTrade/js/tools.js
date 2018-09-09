@@ -39,23 +39,21 @@ function loginFun() {
                 console.log(date);
                 d = JSON.parse(date);
                 console.log(d);
-                if(d.length == 0){               
+                if(d['state'] == 'NO'){               
                     layer.alert("没有此用户或密码为空！",{
                         title:"登录错误",
                         icon:5
                        }); 
                 }else{           
-                    var na = d.map(function(v){
-                       //console.log("名称："+v.user +" 邮箱："+v.email+" 城市："+v.city)
+                        //console.log("名称："+v.user +" 邮箱："+v.email+" 城市："+v.city)
                         //$("h3").html("名称1："+v.user +" 邮箱2："+v.email+" 城市3："+v.city); 
                         //document.getElementById("loginout").innerHTML = name;
-                        //window.parent.document.getElementById("loginreg").innerText="欢迎！"+v.user;
+                        //window.parent.document.getElementById("loginreg").innerText="欢迎！"+d['username'];
                         $("#loginreg").removeAttr("onclick");
                         layer.close(layer.index);
                        //setCookie(scemail,v.email,5);
-                        setCookie("c_name",v.user,5);
-                        window.location.href="./index.html" 
-                    });    
+                       //setCookie("c_name",v.user,5);
+                       window.location.href="./index.html";    
                 }     
             }
         });
@@ -68,12 +66,12 @@ function loginFun() {
 } */
 
 /////////////////////index.html-中“退出”执行--------------O
-var jExit = document.getElementById("hExit");
+/* var jExit = document.getElementById("hExit");
 jExit.addEventListener('click', function(){
     console.log("退出成功");
-    delCookie("c_name","",-1);
-    window.location.href="index.html" 
-},false);
+    //delCookie("c_name","",-1);
+    //window.location.href="index.html" 
+},false); */
 
 /////////////////////index.html-中“个人设置”执行--------------N
 //发送：油箱地址，密码，到LOGING.PHP 返回查询结果
@@ -99,14 +97,39 @@ loging_a.addEventListener('click', function(){
                     console.log("没有查询到登录用户!");               
                 }else{
                     //$("h1").html(d.email +d.password);               
-                    var na = d.map(function(v){
+                   /*  var na = d.map(function(v){
                        console.log("名称："+v.user +" 邮箱："+v.email+" 城市："+v.city)
-                    });    
+                    });    */ 
                 }     
             }
         });
 },false);
-/////////////////////////////////////////检查COOKIE是否登录过--------------ok
+/////////////////////////////////////////检查用户SESSION是否登录过--------------O
+function checKsession() {
+    $.ajax({
+        //发送类型
+        type: "POST",
+        url: "./php/lock.php",
+        //发送数据
+        //data:{'hemail':hemail,'hpassword':hpassword},
+        //成功接收到数据后触发        
+        success: function (date) {
+            date = JSON.parse(date);
+            //打印收到数据              
+            console.log(date);
+            //判断注册信息
+             if (date['state']=='OK') {
+                var username = date['username'];
+                window.parent.document.getElementById("loginreg").innerText="欢迎！"+username;
+                console.log("登录成功");
+            } else {
+                //取错误信息
+                console.log("date[error]:"+date['error']);   
+            }  
+        }
+    });
+}
+/////////////////////////////////////////检查COOKIE是否登录过--------------N
 function checkCookie() {
     var username = getCookie('c_name');
     if(null!=username&&""!=username){

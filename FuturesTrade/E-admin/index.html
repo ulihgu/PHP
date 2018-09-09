@@ -13,8 +13,10 @@
         <meta name="apple-mobile-web-app-capable" content="yes">
         <meta name="format-detection" content="telephone=no">
         <link rel="stylesheet" href="./css/x-admin.css" media="all">
+        <script src="./lib/layui/layui.js" charset="utf-8"></script>
+        <script src="./js/x-admin.js"></script>
     </head>
-    <body>
+    <body onload="admchecKsession()">
         <div class="layui-layout layui-layout-admin">
             <div class="layui-header header header-demo">
                 <div class="layui-main">
@@ -24,11 +26,11 @@
                     <ul class="layui-nav" lay-filter="">
                       <li class="layui-nav-item"><img src="./images/logo.png" class="layui-circle" style="border: 2px solid #A9B7B7;" width="35px" alt=""></li>
                       <li class="layui-nav-item">
-                        <a href="javascript:;">admin</a>
+                        <a id="admin_name" href="javascript:;">admin</a>
                         <dl class="layui-nav-child"> <!-- 二级菜单 -->
                           <dd><a href="">个人信息</a></dd>
                           <dd><a href="">切换帐号</a></dd>
-                          <dd><a href="./login.html">退出</a></dd>
+                          <dd><a href="./php/logout.php">退出</a></dd>
                         </dl>
                       </li>
                       <!-- <li class="layui-nav-item">
@@ -45,13 +47,14 @@
                     <ul class="layui-nav layui-nav-tree site-demo-nav" lay-filter="side">
                         <li class="layui-nav-item">
                             <a class="javascript:;" href="javascript:;">
-                                <i class="layui-icon" style="top: 3px;">&#xe607;</i><cite>问题管理</cite>
+                                <!-- <i class="layui-icon" style="top: 3px;">&#xe607;</i><cite>问题管理</cite> -->   
+                                <img class="mycdimg" src="images/wt.png" alt=""> <cite>问题管理</cite>                             
                             </a>
                             <dl class="layui-nav-child">
                                 <dd class="">
                                     <dd class="">
                                         <a href="javascript:;" _href="./question-list.html">
-                                            <cite>问题列表</cite>
+                                            <cite>问题列表</cite>                                            
                                         </a>
                                     </dd>
                                 </dd>
@@ -64,9 +67,9 @@
                                 </dd>
                             </dl>
                         </li>
-                        <li class="layui-nav-item">
-                            <a class="javascript:;" href="javascript:;">
-                                <i class="layui-icon" style="top: 3px;">&#xe62d;</i><cite>产品管理</cite>
+                      <!--   <li class="layui-nav-item">
+                            <a class="javascript:;" href="javascript:;">                              
+                                <img class="mycdimg" src="images/cp.png" alt=""> <cite>产品管理</cite>
                             </a>
                             <dl class="layui-nav-child">
                                 <dd class="">
@@ -105,10 +108,11 @@
                                     </dd>
                                 </dd>
                             </dl>
-                        </li>
+                        </li> -->
                         <li class="layui-nav-item">
                             <a class="javascript:;" href="javascript:;">
-                                <i class="layui-icon" style="top: 3px;">&#xe634;</i><cite>轮播管理</cite>
+                                <!-- <i class="layui-icon" style="top: 3px;">&#xe634;</i><cite>轮播管理</cite> -->
+                                <img class="mycdimg" src="images/lb.png" alt=""> <cite>轮播管理</cite>
                             </a>
                             <dl class="layui-nav-child">
                                 <dd class="">
@@ -120,9 +124,9 @@
                                 </dd>
                             </dl>
                         </li>
-                        <li class="layui-nav-item">
+                     <!--    <li class="layui-nav-item">
                             <a class="javascript:;" href="javascript:;">
-                                <i class="layui-icon" style="top: 3px;">&#xe642;</i><cite>订单管理</cite>
+                                <img class="mycdimg" src="images/dd.png" alt=""> <cite>订单管理</cite>
                             </a>
                             <dl class="layui-nav-child">
                                 <dd class="">
@@ -133,10 +137,11 @@
                                     </dd>
                                 </dd>
                             </dl>
-                        </li>
+                        </li> -->
                         <li class="layui-nav-item">
                             <a class="javascript:;" href="javascript:;">
-                                <i class="layui-icon" style="top: 3px;">&#xe630;</i><cite>分类管理</cite>
+                                <!-- <i class="layui-icon" style="top: 3px;">&#xe630;</i><cite>分类管理</cite> -->
+                                <img class="mycdimg" src="images/fl.png" alt=""> <cite>分类管理</cite>
                             </a>
                             <dl class="layui-nav-child">
                                 <dd class="">
@@ -148,7 +153,8 @@
                         </li>
                         <li class="layui-nav-item">
                             <a class="javascript:;" href="javascript:;">
-                                <i class="layui-icon" style="top: 3px;">&#xe606;</i><cite>评论管理</cite>
+                               <!--  <i class="layui-icon" style="top: 3px;">&#xe606;</i><cite>评论管理</cite> -->
+                                <img class="mycdimg" src="images/pl.png" alt=""> <cite>评论管理</cite>
                             </a>
                             <dl class="layui-nav-child">
                                 <dd class="">
@@ -165,7 +171,8 @@
                         </li>
                         <li class="layui-nav-item">
                             <a class="javascript:;" href="javascript:;">
-                                <i class="layui-icon" style="top: 3px;">&#xe612;</i><cite>会员管理</cite>
+                               <!--  <i class="layui-icon" style="top: 3px;">&#xe612;</i><cite>会员管理</cite> -->
+                                <img class="mycdimg" src="images/user.png" alt=""> <cite>会员管理</cite>
                             </a>
                             <dl class="layui-nav-child">
                                 <dd class="">
@@ -202,7 +209,8 @@
                         </li>
                         <li class="layui-nav-item">
                             <a class="javascript:;" href="javascript:;">
-                                <i class="layui-icon" style="top: 3px;">&#xe613;</i><cite>管理员管理</cite>
+                                <!-- <i class="layui-icon" style="top: 3px;">&#xe613;</i><cite>管理员管理</cite> -->
+                                <img src="images/users.png" alt=""> <cite>管理员管理</cite>
                             </a>
                             <dl class="layui-nav-child">
                                 <dd class="">
@@ -229,7 +237,8 @@
                         </li>
                         <li class="layui-nav-item">
                             <a class="javascript:;" href="javascript:;">
-                                <i class="layui-icon" style="top: 3px;">&#xe629;</i><cite>系统统计</cite>
+                                <!-- <i class="layui-icon" style="top: 3px;">&#xe629;</i><cite>系统统计</cite> -->
+                                <img class="mycdimg" src="images/tj.png" alt=""> <cite>系统统计</cite>
                             </a>
                             <dl class="layui-nav-child">
                                 <dd class="">
@@ -281,7 +290,8 @@
                         </li>
                         <li class="layui-nav-item">
                             <a class="javascript:;" href="javascript:;">
-                                <i class="layui-icon" style="top: 3px;">&#xe614;</i><cite>系统设置</cite>
+                                <!-- <i class="layui-icon" style="top: 3px;">&#xe614;</i><cite>系统设置</cite> -->
+                                <img class="mycdimg" src="images/set.png" alt=""> <cite>系统设置</cite>
                             </a>
                             <dl class="layui-nav-child">
                                 <dd class="">
@@ -338,9 +348,7 @@
             </div>
             <div class="site-mobile-shade">
             </div>
-        </div>
-        <script src="./lib/layui/layui.js" charset="utf-8"></script>
-        <script src="./js/x-admin.js"></script>
+        </div>        
         <script>
         var _hmt = _hmt || [];
         (function() {

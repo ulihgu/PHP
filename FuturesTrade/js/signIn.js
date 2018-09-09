@@ -23,13 +23,14 @@ signup_in.addEventListener('click', function () {
                 console.log(date);
                 //判断注册信息
                  if (date['state']=='OK') {
-                    layer.alert("用户注册成功！", {
+                    layer.alert("用户注册成功,请登录！", {
                         title: "注册成功！",
                         icon: 1
                     });
-                    setCookie("c_name", husername, 5);
-                    window.location.href="index.html"
-                    console.log("注册完成");
+                    //setCookie("c_name", husername, 5);
+                    //window.location.href="index.html";
+                    //showLogin();
+                     //console.log("注册完成");
                 } else {
                     //取错误信息
                     console.log("date[error]:"+date['error']);   

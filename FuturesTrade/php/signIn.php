@@ -63,7 +63,7 @@
          $mysql_database = 'mysqldatabase';
          $dsn = 'mysql:host='.$mysql_server_name.';dbname='.$mysql_database.';';
          $sqlConnect = new PDO($dsn, $mysql_username, $mysql_password);
-
+         $time = time();
         
          if ($sqlConnect){
              //检查是否有重复的账号
@@ -72,16 +72,13 @@
             $rows = $cquery->fetch(PDO::FETCH_ASSOC);
             if(!$rows){
                 //插入数据库
-                $insertsql = "INSERT INTO account(user,password,email)VALUES('{$name}','{$password1}','{$email}')";
+                $insertsql = "INSERT INTO account(user,password,email,joinTime,isadmin)VALUES('{$name}','{$password1}','{$email}',{$time},'1')";
                 $query = $sqlConnect->prepare($insertsql);
                 if ($query->execute()) {
                     //存储到SESSION中
                     //session_start(); // 如果不执行些方法，不能使用SESSION
-                    //$_SESSION['email'] = $email;
-                    //$_SESSION['name'] = $password;
-                    //存储到COOKIE
-                    //setcookie('email',$email)
-                    //$this->$errorArray = Array('error' =>null);
+                    //$_SESSION['username']=$name;
+                    //$_SESSION['userid']=$rows['id']; 
                     $arrs = array('error' => '正常:注册用户成功！', 'state' => 'OK');
                 } else {
                     $arrs = array('error' => '错误:执行写入数据库失败！', 'state' => 'NO');

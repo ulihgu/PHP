@@ -58,7 +58,7 @@ xblock{
   height: 450px;
   background: #F2F2F2 url() 0 0 no-repeat;
   border-radius: 20px;
-  margin: 80px auto;
+  margin: 180px auto;
   overflow: hidden;
 }
 .x-top{
@@ -151,7 +151,7 @@ input[type="text"]:disabled { background-color: #F2F2F2; }
   border-bottom: 1px solid #F2F2F2;
 }
 .x-login-box .layui-form-label{
-  width: 30px;
+  width: 40px;
 }
 .x-login-box i{
   font-size: 28px;
@@ -468,5 +468,6 @@ body .site-demo-nav .layui-nav-item{line-height: 40px}
   height: 25px;
   margin-left: 10px;
   margin-top: 15px;
+  cursor: pointer;
 }
 
