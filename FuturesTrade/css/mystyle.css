@@ -33,13 +33,13 @@ h3{
 }
 
 #bs-example-navbar-collapse-1{
-    margin-left: 10%;
-    margin-right: 10%;
+    margin-left: 5%;
+    margin-right: 5%;
 }
 
 /* 首页配置 */
 /* .txdw{
-    text-align:center;    
+    margin-left: 5px;    
 } */
 legend{
     text-align:center;
@@ -49,4 +49,16 @@ legend{
 }
 input{
     text-align:center;
+}
+.img{
+   /*  background-color:rgb(236, 230, 230); */
+    margin-left: 2px;
+    margin-top: 15px;
+    height:175px;
+    overflow: hidden;
+}
+
+.mydivcenter{
+    /* margin-left: 35%; */
+    margin:auto auto;
 }
