@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html>
-    
+<html>    
     <head>
         <meta charset="utf-8">
         <title>
@@ -23,35 +22,32 @@
                                 <span class="x-red">*</span>买入形态
                             </label>
                             <div class="layui-input-inline">
-                              <select name="index_xt">
+                              <select lay-filter="index_xt_index" name='index_xt'>
                                 <option value="">请选择要求</option>
-                                <option value="上轨">上轨</option>
-                                <option value="中轨">中轨</option>
-                                <option value="下轨">下轨</option>
+                                <option value="0">上轨</option>
+                                <option value="1">中轨</option>
+                                <option value="2">下轨</option>
                               </select>
                             </div>
                     </div>
                     <div class="layui-form-item">
-                            <label for="index_zb" class="layui-form-label">
+                            <label for='index_zb' class="layui-form-label">
                                 <span class="x-red">*</span>买入指标
                             </label>
                             <div class="layui-input-inline">
-                              <select name="index_zb">
+                              <select lay-filter="index_zb_index" name='index_zb' id="index_zb">
                                 <option value="">请选择要求</option>
-                                <option value="狙击点">狙击点</option>
                               </select>
                             </div>
                     </div>
 
                     <div class="layui-form-item">
-                            <label for="index_zb" class="layui-form-label">
+                            <label for="index_zb_number" class="layui-form-label">
                                 <span class="x-red">*</span>买入指标
                             </label>
-                            <div class="layui-input-inline">
-                              <select name="index_zb">
-                                <option value="">请选择要求</option>
-                                <option value="狙击点">狙击点</option>
-                              </select>
+                            <div class="index_zb_number">
+                                小K线<input type="checkbox" name="vehicle" value="Car" checked="checked">
+                                缩量<input type="checkbox" name="vehicle" value="Car" checked="checked">
                             </div>
                     </div>
 
@@ -137,11 +133,12 @@
                 </div>
             </form>
         </div>
+        <script src="./js/jquery.min.js"></script>
         <script src="./lib/layui/layui.js" charset="utf-8">
         </script>
         <script src="./js/x-layui.js" charset="utf-8">
         </script>
-        <script>
+        <script>        
             layui.use(['form','layer'], function(){
                 $ = layui.jquery;
               var form = layui.form()
@@ -161,7 +158,56 @@
                     }
                 }
               });
-
+              //监听选择“买入形态”
+              form.on('select(index_xt_index)', function(data_xt){
+                  /* console.log(data.value); */
+                  var intxt =data_xt.value;
+                  $("#index_zb").next().find("dl").empty();
+                  $("#index_zb").empty();
+                  if(intxt ==0)
+                  {
+                    var new_option ='<option value="">请选择要求</option><option value="0">无</option>';
+                    $("#index_zb").append(new_option);
+                    var lay_newtr ="<dd lay-value='0' calss=''>无</dd>";                    
+                    $("#index_zb").next().find("dl").append(lay_newtr);
+                  }
+                  if(intxt ==1)
+                  {
+                    var new_option ='<option value="">请选择要求</option><option value="0">狙击点</option><option value="1">聚宝盆</option>';
+                    $("#index_zb").append(new_option);
+                    var lay_newtr ='<dd lay-value="0" calss="">狙击点</dd><dd lay-value="1" calss="">聚宝盆</dd>';
+                    $("#index_zb").next().find("dl").append(lay_newtr);
+                  }
+                  if(intxt ==2)
+                  {
+                    var new_option ='<option value="">请选择要求</option><option value="0">止跌阳</option>';
+                    $("#index_zb").append(new_option);
+                    var lay_newtr ='<dd lay-value="0" calss="">止跌阳</dd>';
+                    $("#index_zb").next().find("dl").append(lay_newtr);
+                  }
+                  form.render('select');
+                });
+              //监听选择“买入形态”
+              form.on('select(index_zb_index)', function(data_zb){
+                  console.log(data_zb.value);
+                  var intzb =$("#index_zb").next().find("dd.layui-this").text();
+                  console.log(intzb);
+                  $(".index_zb_number").empty();
+                  if(intzb =="狙击点")
+                  {
+                    /* $("#index_zb").val(); */
+                    var new_input ='<input type="checkbox" name="xk" value="xk" checked="checked"><div class="layui-unselect layui-form-checkbox layui-form-checked"><span>小K线</span><i class="layui-icon"></i></div>小K线<input type="checkbox" name="sl" value="sl" checked="checked"><div class="layui-unselect layui-form-checkbox layui-form-checked"><span>缩量</span><i class="layui-icon"></i></div>缩量<input type="checkbox" name="zg" value="zg" checked="checked"><div class="layui-unselect layui-form-checkbox layui-form-checked"><span>中轨向上</span><i class="layui-icon"></i></div>中轨向上<input type="checkbox" name="zf" value="zf" checked="checked"><div class="layui-unselect layui-form-checkbox layui-form-checked"><span>正负1%</span><i class="layui-icon"></i></div>正负1%';
+                    $(".index_zb_number").append(new_input);
+                  }
+                  if(intzb =="聚宝盆")
+                  {
+                    var new_input ='<input type="checkbox" name="vehicle" value="Car" checked="checked"><div class="layui-unselect layui-form-checkbox layui-form-checked"><span>勾选</span><i class="layui-icon"></i></div>  下跌天数不得超7天';
+                    $(".index_zb_number").append(new_input);
+                  }
+                  if(intzb ==2)
+                  {
+                  }
+                });
               //监听提交
               form.on('submit(add)', function(data){
                 console.log(data);
