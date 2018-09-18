@@ -4,7 +4,7 @@
     <head>
         <meta charset="utf-8">
         <title>
-            添加管理员X-admin v1.0
+            交易管理 X-admin v1.0
         </title>
         <meta name="renderer" content="webkit">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -19,35 +19,35 @@
         <div class="x-body">
             <form class="layui-form">
                 <div class="layui-form-item">
-                    <label for="username" class="layui-form-label">
-                        <span class="x-red">*</span>登录名
+                    <label for="capital" class="layui-form-label">
+                        <span class="x-red">*</span>总资金
                     </label>
                     <div class="layui-input-inline">
-                        <input type="text" id="username" name="username" required="" lay-verify="required"
+                        <input type="text" id="capital" name="capital" required="" lay-verify="number"
                         autocomplete="off" class="layui-input">
                     </div>
                     <div class="layui-form-mid layui-word-aux">
-                        <span class="x-red">*</span>将会成为您唯一的登入名
+                        <span class="x-red">*</span>买卖基本数据
                     </div>
                 </div>
                 <div class="layui-form-item">
-                    <label for="phone" class="layui-form-label">
-                        <span class="x-red">*</span>手机
+                    <label for="Price" class="layui-form-label">
+                        <span class="x-red">*</span>价位
                     </label>
                     <div class="layui-input-inline">
-                        <input type="text" id="phone" name="phone" required="" lay-verify="phone"
+                        <input type="text" id="Price" name="Price" required="" lay-verify="number"
                         autocomplete="off" class="layui-input">
                     </div>
                     <div class="layui-form-mid layui-word-aux">
-                        <span class="x-red">*</span>将会成为您唯一的登入名
+                        <span class="x-red">*</span>指标买入价位
                     </div>
                 </div>
                 <div class="layui-form-item">
-                    <label for="L_email" class="layui-form-label">
-                        <span class="x-red">*</span>邮箱
+                    <label for="L_buyAmount" class="layui-form-label">
+                        <span class="x-red">*</span>买入手数
                     </label>
                     <div class="layui-input-inline">
-                        <input type="text" id="L_email" name="email" required="" lay-verify="email"
+                        <input type="text" id="L_buyAmount" name="buyAmount" required="" lay-verify="number"
                         autocomplete="off" class="layui-input">
                     </div>
                     <div class="layui-form-mid layui-word-aux">
@@ -56,43 +56,46 @@
                 </div>
                 <div class="layui-form-item">
                     <label for="role" class="layui-form-label">
-                        <span class="x-red">*</span>角色
+                        <span class="x-red">*</span>买入要求
                     </label>
                     <div class="layui-input-inline">
                       <select name="role">
-                        <option value="">请选择角色</option>
-                        <option value="超级管理员">超级管理员</option>
-                        <option value="编辑人员">编辑人员</option>
-                        <option value="问题维护">问题维护</option>
+                        <option value="">请选择要求</option>
+                        <option value="回调">回调</option>
+                        <option value="缩量">缩量</option>
+                        <option value="底背离">底背离</option>
                       </select>
                     </div>
                 </div>
                 <div class="layui-form-item">
-                    <label for="L_pass" class="layui-form-label">
-                        <span class="x-red">*</span>密码
+                    <label for="L_Price1" class="layui-form-label">
+                        <span class="x-red">*</span>买入一
                     </label>
                     <div class="layui-input-inline">
-                        <input type="password" id="L_pass" name="pass" required="" lay-verify="pass"
+                        <input type="text" id="L_Price1" name="Price1" required="" lay-verify="number"
                         autocomplete="off" class="layui-input">
                     </div>
                     <div class="layui-form-mid layui-word-aux">
-                        6到16个字符
+                        <span class="x-red">*</span>点位
                     </div>
                 </div>
                 <div class="layui-form-item">
-                    <label for="L_repass" class="layui-form-label">
-                        <span class="x-red">*</span>确认密码
+                    <label for="L_Price2" class="layui-form-label">
+                        <span class="x-red">*</span>买入二
                     </label>
                     <div class="layui-input-inline">
-                        <input type="password" id="L_repass" name="repass" required="" lay-verify="repass"
+                        <input type="text" id="L_Price2" name="Price2" required="" lay-verify="number"
                         autocomplete="off" class="layui-input">
+                    </div>
+                    <div class="layui-form-mid layui-word-aux">
+                        <span class="x-red">*</span>点位
                     </div>
                 </div>
                 <div class="layui-form-item">
                     <label for="L_repass" class="layui-form-label">
                     </label>
                     <button  class="layui-btn" lay-filter="add" lay-submit="">
-                        增加
+                        买入
                     </button>
                 </div>
             </form>
