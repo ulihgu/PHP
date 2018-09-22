@@ -46,17 +46,17 @@
                                 <span class="x-red">*</span>买入指标
                             </label>
                             <div class="index_zb_number">
-                                <input type="checkbox" name="vehicle" value="Car" checked="checked">小K线 
-                                <input name="id[]" checked="" type="checkbox" value="2">缩量 
+                                <input type="checkbox" name="smallK" value="小K线" checked="checked">小K线 
+                                <input type="checkbox" name="shrinkage" value="缩量" checked="checked">缩量 
                             </div>
                     </div>
 
                 <div class="layui-form-item">
-                    <label for="capital" class="layui-form-label">
+                    <label for="L_stockCode" class="layui-form-label">
                         <span class="x-red">*</span>股票代码
                     </label>
                     <div class="layui-input-inline">
-                        <input type="text" id="capital" name="capital" required="" lay-verify="number"
+                        <input type="text" id="capital" name="stockCode" required="" lay-verify="number"
                         autocomplete="off" class="layui-input">
                     </div>
                     <div class="layui-form-mid layui-word-aux">
@@ -64,11 +64,11 @@
                     </div>
                 </div>
                 <div class="layui-form-item">
-                    <label for="Price" class="layui-form-label">
+                    <label for="L_stockName" class="layui-form-label">
                         <span class="x-red">*</span>名称
                     </label>
                     <div class="layui-input-inline">
-                        <input type="text" id="code" name="code" required="" lay-verify="text"
+                        <input type="text" id="code" name="stockName" required="" lay-verify="text"
                         autocomplete="off" class="layui-input">
                     </div>
                     <div class="layui-form-mid layui-word-aux">
@@ -88,15 +88,27 @@
                     </div>
                 </div>
                 <div class="layui-form-item">
-                    <label for="L_Price1" class="layui-form-label">
+                    <label for="L_dealPrice" class="layui-form-label">
                         <span class="x-red">*</span>价格
                     </label>
                     <div class="layui-input-inline">
-                        <input type="text" id="L_Price1" name="Price1" required="" lay-verify="number"
+                        <input type="text" id="L_dealPrice" name="dealPrice" required="" lay-verify="numberxs"
                         autocomplete="off" class="layui-input">
                     </div>
                     <div class="layui-form-mid layui-word-aux">
                         <span class="x-red">*</span>买入商品价格
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label for="L_priceLoss" class="layui-form-label">
+                        <span class="x-red">*</span>止损
+                    </label>
+                    <div class="layui-input-inline">
+                        <input type="text" id="L_Price1" name="priceLoss" required="" lay-verify="numberxs"
+                        autocomplete="off" class="layui-input">
+                    </div>
+                    <div class="layui-form-mid layui-word-aux">
+                        <span class="x-red">*</span>商品止损价格
                     </div>
                 </div>
                 <div class="layui-form-item">
@@ -105,7 +117,7 @@
                     </label>
                     <div class="layui-input-inline">
                         <div class="layui-input-inline">
-                            <input class="layui-input" placeholder="开始日" id="LAY_demorange_s">
+                            <input class="layui-input" placeholder="开始日" id="LAY_demorange_s" lay-verify="date">
                         </div>
                     </div>
                     <div class="layui-form-mid layui-word-aux">
@@ -138,8 +150,8 @@
                 ,max: '2099-06-16 23:59:59'
                 ,istoday: false
                 ,choose: function(datas){
-                  end.min = datas; //开始日选好后，重置结束日的最小日期
-                  end.start = datas //将结束日的初始值设定为开始日
+                  //end.min = datas; //开始日选好后，重置结束日的最小日期
+                  //end.start = datas //将结束日的初始值设定为开始日
                 }
               };
               //选择日期
@@ -200,34 +212,89 @@
                   if(intzb =="狙击点")
                   {
                     /* $("#index_zb").val(); */
-                    var new_input ='<input type="checkbox" name="xk" value="xk" checked="checked"><div class="layui-unselect layui-form-checkbox"><span>小K线</span><i class="layui-icon"></i></div>小K线 <input type="checkbox" name="sl" value="sl" checked="checked"><div class="layui-unselect layui-form-checkbox layui-form-checked"><span>缩量</span><i class="layui-icon"></i></div>缩量 <input type="checkbox" name="zg" value="zg" checked="checked"><div class="layui-unselect layui-form-checkbox layui-form-checked"><span>中轨向上</span><i class="layui-icon"></i></div>中轨向上 <input type="checkbox" name="zf" value="zf" checked="checked"><div class="layui-unselect layui-form-checkbox layui-form-checked"><span>正负1%</span><i class="layui-icon"></i></div>正负1% ';
+                    var new_input ='<input type="checkbox" name="smallK" value="小K线" checked="checked">小K线 <input type="checkbox" name="shrinkage" value="缩量" checked="checked">缩量 <input type="checkbox" name="upward" value="中轨向上" checked="checked">中轨向上 <input type="checkbox" name="positives" value="正负1%" checked="checked">正负1% ';
                     $(".index_zb_number").append(new_input);
                   }
                   if(intzb =="聚宝盆")
                   {
-                    var new_input ='<input type="checkbox" name="vehicle" value="Car" checked="checked">下跌天数不得超7天 <input type="checkbox" name="vehicle" value="Car" checked="checked">中轨向上或者转折 <input type="checkbox" name="vehicle" value="Car" checked="checked">不得打下轨 <input type="checkbox" name="vehicle" value="Car" checked="checked">成交量适当放大但不得倍量';
+                    var new_input ='<input type="checkbox" name="daysNumber" value="下跌天数不得超7天" checked="checked">下跌天数不得超7天 <input type="checkbox" name="middleUpward" value="中轨向上或者转折" checked="checked">中轨向上或者转折 <input type="checkbox" name="rails" value="不得打下轨" checked="checked">不得打下轨 <input type="checkbox" name="enlarge" value="成交量适当放大但不得倍量" checked="checked">成交量适当放大但不得倍量';
                     $(".index_zb_number").append(new_input);
                   }
                   if(intzb =="止跌阳")
                   {
-                    var new_input ='<input name="id[]" checked="" type="checkbox" value="2">至少两条阴线 <input name="id[]" checked="" type="checkbox" value="2">缩量 <input name="id[]" checked="" type="checkbox" value="2">收盘价大于前天收盘价 ';
+                    var new_input ='<input type="checkbox" name="vaginalLine" value="至少两条阴线" checked="checked">至少两条阴线 <input type="checkbox" name="shrinkage" value="缩量" checked="checked">缩量 <input type="checkbox" name="stopFalling" value="收盘价大于前天收盘价" checked="checked">收盘价大于前天收盘价 ';
                     $(".index_zb_number").append(new_input);
                   }
                   form.render(null, 'index_zb_index');
                 });                
               //监听提交
-              form.on('submit(add)', function(data){
-                console.log(data);
-                //发异步，把数据提交给php
+              form.on('submit(add)', function(){
+                //console.log(data);
+                //console.log(data.field);
+                //console.log(data.field.smallK);
+                /*//发异步，把数据提交给php
                 layer.alert("增加成功", {icon: 6},function () {
                     // 获得frame索引
                     var index = parent.layer.getFrameIndex(window.name);
                     //关闭当前frame
                     parent.layer.close(index);
-                });
-                return false;
+                });*/
+                dataSend =data.field;
+                $.ajax({
+                    type:"POST",
+                    url:"php/insertbuy.php",
+                    data:{'buyAmount':dataSend.buyAmount,'dealPrice':dataSend.dealPrice,'index_xt':dataSend.index_xt,'index_zb':dataSend.index_zb,'positives':dataSend.positives,'priceLoss':dataSend.priceLoss,'shrinkage':dataSend.shrinkage,'smallK':dataSend.smallK,'stockCode':dataSend.stockCode,'stockName':dataSend.stockName,'upward':dataSend.upward},
+                    success:function(date){
+                        console.log(date);
+                        //判断买入信息
+                        if (date['state']=='OK') {
+                            layer.alert("股票买入成功！", {
+                                title: "买入成功！",
+                                icon: 1
+                            });
+                            //setCookie("c_name", husername, 5);
+                            //window.location.href="index.html";
+                            //showLogin();
+                            console.log("注册完成"+date['error']);
+                            $(this).resetForm(); // 提交后重置表单
+                        } else {
+                            //取错误信息
+                            console.log("date[error]:"+date['error']);   
+                            layer.alert("失败_"+date['error'], {
+                                title: "买入失败！",
+                                icon: 2
+                            });
+                        }                     
+                    }
+                   
+                });               
+                //return false;
               });
-              
+              //保存数据没有生效
+              function buytrs() {
+                $.ajax({
+                    type:"POST",
+                    url:"php/insertbuy.php",
+                    data:{'state':'2'},
+                    success:function(data){
+                        if(data.length>0){
+                             data = JSON.parse(data);
+                             console.log(data);
+                             data.forEach(function(x){
+                             //开始写入到表格中
+                             mytime =getdate(x.joinTime);
+                             var newtr = '<tr><td><input type="checkbox" value="1" name=""></td><td>'+x.id+'</td><td>'+x.user+'</td><td >18500363515</td><td >'+x.email+'</td><td >超级管理员</td><td>'+mytime+'</td><td class="td-status"><span class="layui-btn layui-btn-normal layui-btn-mini">已启用</span></td><td class="td-manage"><a style="text-decoration:none" onclick="admin_stop(this,"10001")" href="javascript:;" title="停用"><i class="layui-icon">&#xe601;</i></a><a title="编辑" href="javascript:;" onclick="admin_edit("编辑","admin-edit.html","4","","510")"class="ml-5" style="text-decoration:none"><i class="layui-icon">&#xe642;</i></a><a title="删除" href="javascript:;" onclick="admin_del(this,"1")"style="text-decoration:none"><i class="layui-icon">&#xe640;</i></a></td></tr>';
+                             //结束
+                             $(".tbodytable").append(newtr);
+                              });
+                              $(this).resetForm(); // 提交后重置表单
+                        }else{
+                         console.log(data);
+                        }                       
+                    }
+                   
+                });
+             }
               
             });
         </script>
