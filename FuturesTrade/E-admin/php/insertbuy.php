@@ -1,5 +1,6 @@
 <?php
-    include "../public/common/config.php";
+    ini_set("error_reporting",E_ALL ^ E_NOTICE); 
+    //include "../../php/sqlConfig.php";
 
     $buyAmount = $_POST['buyAmount'];//数量
     $dealPrice = $_POST['dealPrice'];//成交价格
@@ -15,13 +16,19 @@
 
     $time = time();
 
-    $sql = "insert into shares_stock(index_zb,index_xt,shares_amount,shares_price,positives,priceLoss,shrinkage,smallK,stockCode,stockName,upward,time) 
-    values('{'{$index_zb}','{$index_xt}',$buyAmount}','{$dealPrice}','{$positives}','{$priceLoss}','{$shrinkage}','{$smallK}','{$stockCode}','{$stockName}','{$upward}',{$time})";
+    $mysql_server_name = 'cdb-g2r69g0e.bj.tencentcdb.com:10018';
+    $mysql_username = 'root';
+    $mysql_password = 'ulihgu21';
+    $mysql_database = 'mysqldatabase';
+    $dsn = 'mysql:host='.$mysql_server_name.';dbname='.$mysql_database.';';
+    $sqlConnect = new PDO($dsn, $mysql_username, $mysql_password);
+
+    $sql = "insert into shares_stock(index_zb,index_xt,shares_amount,shares_price,positives,priceLoss,shrinkage,smallK,shares_code,shares_name,upward,time) 
+    values('{$index_zb}','{$index_xt}','{$buyAmount}','{$dealPrice}','{$positives}','{$priceLoss}','{$shrinkage}','{$smallK}','{$stockCode}','{$stockName}','{$upward}',{$time})";
     $query = $sqlConnect->prepare($sql);    
     
     $arrs = array();
     if($query->execute()){
-        echo "<script>alert('添加成功')</script>";
         $arrs = array('error' =>'正常:没有问题！','state'=>'OK');
     }else{
         $arrs = array('error' => '错误:写入数据库失败！', 'state' => 'NO');

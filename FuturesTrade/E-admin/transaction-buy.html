@@ -16,7 +16,7 @@
     
     <body>
         <div class="x-body">
-            <form class="layui-form">
+            <form id="form1" class="layui-form">
                     <div class="layui-form-item">
                             <label for="index_xt" class="layui-form-label">
                                 <span class="x-red">*</span>买入形态
@@ -228,9 +228,9 @@
                   form.render(null, 'index_zb_index');
                 });                
               //监听提交
-              form.on('submit(add)', function(){
-                //console.log(data);
-                //console.log(data.field);
+              form.on('submit(add)', function(data){
+                console.log(data);
+                console.log(data.field);
                 //console.log(data.field.smallK);
                 /*//发异步，把数据提交给php
                 layer.alert("增加成功", {icon: 6},function () {
@@ -244,10 +244,11 @@
                     type:"POST",
                     url:"php/insertbuy.php",
                     data:{'buyAmount':dataSend.buyAmount,'dealPrice':dataSend.dealPrice,'index_xt':dataSend.index_xt,'index_zb':dataSend.index_zb,'positives':dataSend.positives,'priceLoss':dataSend.priceLoss,'shrinkage':dataSend.shrinkage,'smallK':dataSend.smallK,'stockCode':dataSend.stockCode,'stockName':dataSend.stockName,'upward':dataSend.upward},
-                    success:function(date){
-                        console.log(date);
+                    success:function(date_rcv){
+                        console.log(date_rcv);
+                        date_rcv = JSON.parse(date_rcv);
                         //判断买入信息
-                        if (date['state']=='OK') {
+                        if (date_rcv['state']=='OK') {
                             layer.alert("股票买入成功！", {
                                 title: "买入成功！",
                                 icon: 1
@@ -255,12 +256,13 @@
                             //setCookie("c_name", husername, 5);
                             //window.location.href="index.html";
                             //showLogin();
-                            console.log("注册完成"+date['error']);
-                            $(this).resetForm(); // 提交后重置表单
+                            console.log("注册完成"+date_rcv['error']);
+                            //$(this).resetForm(); // 提交后重置表单
+                            document.getElementById("form1").reset();
                         } else {
                             //取错误信息
-                            console.log("date[error]:"+date['error']);   
-                            layer.alert("失败_"+date['error'], {
+                            console.log("date[error]:"+date_rcv['error']);   
+                            layer.alert("失败_"+date_rcv['error'], {
                                 title: "买入失败！",
                                 icon: 2
                             });
@@ -268,34 +270,8 @@
                     }
                    
                 });               
-                //return false;
+                return false;
               });
-              //保存数据没有生效
-              function buytrs() {
-                $.ajax({
-                    type:"POST",
-                    url:"php/insertbuy.php",
-                    data:{'state':'2'},
-                    success:function(data){
-                        if(data.length>0){
-                             data = JSON.parse(data);
-                             console.log(data);
-                             data.forEach(function(x){
-                             //开始写入到表格中
-                             mytime =getdate(x.joinTime);
-                             var newtr = '<tr><td><input type="checkbox" value="1" name=""></td><td>'+x.id+'</td><td>'+x.user+'</td><td >18500363515</td><td >'+x.email+'</td><td >超级管理员</td><td>'+mytime+'</td><td class="td-status"><span class="layui-btn layui-btn-normal layui-btn-mini">已启用</span></td><td class="td-manage"><a style="text-decoration:none" onclick="admin_stop(this,"10001")" href="javascript:;" title="停用"><i class="layui-icon">&#xe601;</i></a><a title="编辑" href="javascript:;" onclick="admin_edit("编辑","admin-edit.html","4","","510")"class="ml-5" style="text-decoration:none"><i class="layui-icon">&#xe642;</i></a><a title="删除" href="javascript:;" onclick="admin_del(this,"1")"style="text-decoration:none"><i class="layui-icon">&#xe640;</i></a></td></tr>';
-                             //结束
-                             $(".tbodytable").append(newtr);
-                              });
-                              $(this).resetForm(); // 提交后重置表单
-                        }else{
-                         console.log(data);
-                        }                       
-                    }
-                   
-                });
-             }
-              
             });
         </script>
         <script>
