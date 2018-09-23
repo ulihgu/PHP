@@ -14,15 +14,16 @@
     $stockName = $_POST['stockName'];
     $upward = $_POST['upward'];
 
-    $time = time();
+    $time = date("Y-m-d",time());
 
-    $mysql_server_name = 'cdb-g2r69g0e.bj.tencentcdb.com:10018';
+    /* $mysql_server_name = 'cdb-g2r69g0e.bj.tencentcdb.com:10018';
     $mysql_username = 'root';
     $mysql_password = 'ulihgu21';
     $mysql_database = 'mysqldatabase';
     $dsn = 'mysql:host='.$mysql_server_name.';dbname='.$mysql_database.';';
-    $sqlConnect = new PDO($dsn, $mysql_username, $mysql_password);
-
+    $sqlConnect = new PDO($dsn, $mysql_username, $mysql_password); */
+    include "../../php/sqlConfig.php";
+    
     $sql = "insert into shares_stock(index_zb,index_xt,shares_amount,shares_price,positives,priceLoss,shrinkage,smallK,shares_code,shares_name,upward,time) 
     values('{$index_zb}','{$index_xt}','{$buyAmount}','{$dealPrice}','{$positives}','{$priceLoss}','{$shrinkage}','{$smallK}','{$stockCode}','{$stockName}','{$upward}',{$time})";
     $query = $sqlConnect->prepare($sql);    

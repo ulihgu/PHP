@@ -170,6 +170,35 @@
   <script src="js/bootstrap.min.js"></script>
   <script src="js/layer.js"></script>
   <script src="js/tools.js"></script>
+  <script>
+    ////刷新数据--------------
+  //$.holdReady(true);
+  $(document).ready(function(){
+  //alert("ready");
+  var mydate = new Date().getTime();
+  console.log("JAVASCRPT:"+mydate);
+  $.ajax({
+    //发送类型
+    type: "POST",
+    url: "php/queryDateData.php",
+    //发送数据
+    data:{'mydate':mydate},
+    //成功接收到数据后触发        
+    success: function (date_rcv) {      
+      date_rcv = JSON.parse(date_rcv);
+      console.log(date_rcv);
+      //判断买入信息
+      if (date_rcv['state']=='OK') {
+          console.log("查询完成"+date_rcv['error']);
+          //$(this).resetForm(); // 提交后重置表单
+      } else {
+          //取错误信息
+          console.log("查询失败"+date_rcv['error']);
+      }  
+    }
+  });
+});
+  </script>
 </body>
 
 </html>
