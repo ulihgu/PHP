@@ -35,7 +35,7 @@
             </a>
           </li>
           <li>
-            <a href="Construction.html">最新资讯</a>
+            <a href="latestInformation.html">最新资讯</a>
           </li>
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">参数配置
@@ -78,6 +78,7 @@
               <li>
                 <a href="Construction.html">消息</a>
               </li>
+              <li role="separator" class="divider"></li>
               <li>
                 <a href="./home/login.html">后台管理</a>
               </li>
@@ -94,7 +95,7 @@
     <!-- /.container-fluid -->
   </nav>
    <div class="row">
-    <div class="col-md-2 col-md-offset-2">
+    <div class="col-md-2 col-md-offset-1">
       <img src="image/log.jpg" alt="" width="180" height="150">      
     </div>
     <div class="col-md-6">
@@ -104,11 +105,13 @@
          </p>
         <table class="table table-condensed table-hover">
           <tr class="warning">
+            <th>序号</th>
             <th>编码</th>
             <th>名称</th>
-            <th>点位</th>
-            <th>数量</th>
-            <th>金额</th>
+            <th>买入价格</th>
+            <th>仓位</th>
+            <th>止损位</th>
+            <th>执行时间</th>
         </tr>
         <tr class="danger">
           <td>300645</td>
@@ -116,6 +119,7 @@
           <td>3562</td>
           <td>10</td>
           <td>65520.00</td>
+          <td>2018-9-23</td>
         </tr>
         <tr>
           <td>300645</td>
@@ -123,28 +127,8 @@
           <td>3562</td>
           <td>10</td>
           <td>45520.00</td>
-        </tr>
-        <tr class="danger">
-          <td>300645</td>
-          <td>奥可马</td>
-          <td>3562</td>
-          <td>10</td>
-          <td>236520.00</td>
-        </tr>
-        <tr>
-          <td>300645</td>
-          <td>长生生物</td>
-          <td>3562</td>
-          <td>10</td>
-          <td>36520.00</td>
-        </tr>
-        <tr class="danger">
-          <td>300645</td>
-          <td>期货一期</td>
-          <td>3562</td>
-          <td>10</td>
-          <td>12520.00</td>
-        </tr>
+          <td>2018-9-23</td>
+        </tr>       
         </table>
     </div>
     <div class="col-md-1"></div>
@@ -172,32 +156,49 @@
   <script src="js/tools.js"></script>
   <script>
     ////刷新数据--------------
-  //$.holdReady(true);
-  $(document).ready(function(){
-  //alert("ready");
-  var mydate = new Date().getTime();
-  console.log("JAVASCRPT:"+mydate);
-  $.ajax({
-    //发送类型
-    type: "POST",
-    url: "php/queryDateData.php",
-    //发送数据
-    data:{'mydate':mydate},
-    //成功接收到数据后触发        
-    success: function (date_rcv) {      
-      date_rcv = JSON.parse(date_rcv);
-      console.log(date_rcv);
-      //判断买入信息
-      if (date_rcv['state']=='OK') {
-          console.log("查询完成"+date_rcv['error']);
-          //$(this).resetForm(); // 提交后重置表单
-      } else {
-          //取错误信息
-          console.log("查询失败"+date_rcv['error']);
-      }  
-    }
-  });
-});
+    //$.holdReady(true);
+    $(document).ready(function(){
+        //alert("ready");
+        var mydate = new Date().getTime();
+        console.log("JAVASCRPT:"+mydate);
+        $.ajax({
+          //发送类型
+          type: "POST",
+          url: "php/queryDateData.php",
+          //发送数据
+          data:{'mydate':mydate},
+          //成功接收到数据后触发        
+          success: function (date_rcv) {      
+            date_rcv = JSON.parse(date_rcv);
+            console.log(date_rcv);
+            //判断买入信息
+            if (date_rcv.length>0) {
+                //console.log("查询完成"+date_rcv['error']);
+                $(".table").empty();
+                var newtr = '<tbody><tr class="warning"><th>序号</th><th>编码</th><th>名称</th><th>买入价格</th><th>仓位</th><th>止损位</th><th>执行时间</th></tr></tbody>';
+                $(".table").append(newtr); 
+                var i=1;             
+                date_rcv.forEach(function(x){
+                  //开始写入到表格中
+                  //mytime =getdate(x.joinTime);
+                  if(i%2==0)
+                  {
+                    var newtr = '<tr><th>'+i+'</th><th>'+x.shares_code+'</th><th>'+x.shares_name+'</th><th>'+x.shares_price+'</th><th>'+x.shares_amount+'</th><th>'+x.priceLoss+'</th><th>'+x.time+'</th></tr>';
+                  }else{
+                    var newtr = '<tr class="danger"><th>'+i+'</th><th>'+x.shares_code+'</th><th>'+x.shares_name+'</th><th>'+x.shares_price+'</th><th>'+x.shares_amount+'</th><th>'+x.priceLoss+'</th><th>'+x.time+'</th></tr>';
+                  //结束
+                  }                  
+                  $(".table").append(newtr);   
+                  i++;        
+                });              
+            } else {
+                //取错误信息
+                console.log("查询失败"+date_rcv['error']);
+            }                
+          }
+        });
+        //$.parser.parse($('.table').parent());
+     });
   </script>
 </body>
 

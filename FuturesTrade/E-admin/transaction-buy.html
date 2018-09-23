@@ -229,7 +229,7 @@
                 });                
               //监听提交
               form.on('submit(add)', function(data){
-                console.log(data);
+                //console.log(data);
                 console.log(data.field);
                 //console.log(data.field.smallK);
                 /*//发异步，把数据提交给php
@@ -243,7 +243,7 @@
                 $.ajax({
                     type:"POST",
                     url:"php/insertbuy.php",
-                    data:{'buyAmount':dataSend.buyAmount,'dealPrice':dataSend.dealPrice,'index_xt':dataSend.index_xt,'index_zb':dataSend.index_zb,'positives':dataSend.positives,'priceLoss':dataSend.priceLoss,'shrinkage':dataSend.shrinkage,'smallK':dataSend.smallK,'stockCode':dataSend.stockCode,'stockName':dataSend.stockName,'upward':dataSend.upward},
+                    data:{'buyAmount':dataSend.buyAmount,'dealPrice':dataSend.dealPrice,'index_xt':dataSend.index_xt,'index_zb':dataSend.index_zb,'positives':dataSend.positives,'priceLoss':dataSend.priceLoss,'shrinkage':dataSend.shrinkage,'smallK':dataSend.smallK,'stockCode':dataSend.stockCode,'stockName':dataSend.stockName,'upward':dataSend.upward,'daysNumber':dataSend.daysNumber,'enlarge':dataSend.enlarge,'middleUpward':dataSend.middleUpward,'rails':dataSend.rails,'vaginalLine':dataSend.vaginalLine,'stopFalling':dataSend.stopFalling},
                     success:function(date_rcv){
                         console.log(date_rcv);
                         date_rcv = JSON.parse(date_rcv);
@@ -256,7 +256,7 @@
                             //setCookie("c_name", husername, 5);
                             //window.location.href="index.html";
                             //showLogin();
-                            console.log("注册完成"+date_rcv['error']);
+                            console.log("买入完成"+date_rcv['error']);
                             //$(this).resetForm(); // 提交后重置表单
                             document.getElementById("form1").reset();
                         } else {
