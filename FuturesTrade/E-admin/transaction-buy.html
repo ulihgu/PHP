@@ -242,11 +242,11 @@
                 dataSend =data.field;
                 $.ajax({
                     type:"POST",
-                    url:"php/insertbuy.php",
+                    url:"php/insert_buy.php",
                     data:{'buyAmount':dataSend.buyAmount,'dealPrice':dataSend.dealPrice,'index_xt':dataSend.index_xt,'index_zb':dataSend.index_zb,'positives':dataSend.positives,'priceLoss':dataSend.priceLoss,'shrinkage':dataSend.shrinkage,'smallK':dataSend.smallK,'stockCode':dataSend.stockCode,'stockName':dataSend.stockName,'upward':dataSend.upward,'daysNumber':dataSend.daysNumber,'enlarge':dataSend.enlarge,'middleUpward':dataSend.middleUpward,'rails':dataSend.rails,'vaginalLine':dataSend.vaginalLine,'stopFalling':dataSend.stopFalling},
-                    success:function(date_rcv){
-                        console.log(date_rcv);
+                    success:function(date_rcv){                        
                         date_rcv = JSON.parse(date_rcv);
+                        console.log(date_rcv);
                         //判断买入信息
                         if (date_rcv['state']=='OK') {
                             layer.alert("股票买入成功！", {

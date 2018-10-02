@@ -20,82 +20,82 @@
             <form class="layui-form">
                 <div class="layui-form-item">
                     <label for="capital" class="layui-form-label">
-                        <span class="x-red">*</span>总资金
+                        <span class="x-red">*</span>股票代码
                     </label>
                     <div class="layui-input-inline">
-                        <input type="text" id="capital" name="capital" required="" lay-verify="number"
+                        <input type="text" id="capital" name="stockCode" required="" lay-verify="number"
                         autocomplete="off" class="layui-input">
                     </div>
                     <div class="layui-form-mid layui-word-aux">
-                        <span class="x-red">*</span>买卖基本数据
+                        <span class="x-red">*</span>卖出股票代码
                     </div>
                 </div>
                 <div class="layui-form-item">
                     <label for="Price" class="layui-form-label">
-                        <span class="x-red">*</span>价位
+                        <span class="x-red">*</span>卖出价格
                     </label>
                     <div class="layui-input-inline">
-                        <input type="text" id="Price" name="Price" required="" lay-verify="number"
+                        <input type="text" id="Price" name="dealPrice" required="" lay-verify="numberxs"
                         autocomplete="off" class="layui-input">
                     </div>
                     <div class="layui-form-mid layui-word-aux">
-                        <span class="x-red">*</span>指标买入价位
+                        <span class="x-red">*</span>指标卖出价位
                     </div>
                 </div>
                 <div class="layui-form-item">
+                    <label for="L_dosage" class="layui-form-label">
+                        <span class="x-red">*</span>库存量
+                    </label>
+                    <div class="layui-input-inline">
+                        <input type="text" value="10000" id="L_Price1" name="dosage" required="" lay-verify="text"
+                        autocomplete="off" class="layui-input" disabled="disabled">
+                    </div>
+                    <div class="layui-form-mid layui-word-aux">
+                        <span class="x-red">*</span>可操作的库存量
+                    </div>
+                </div> 
+                <div class="layui-form-item">
                     <label for="L_buyAmount" class="layui-form-label">
-                        <span class="x-red">*</span>买入手数
+                        <span class="x-red">*</span>卖出数量
                     </label>
                     <div class="layui-input-inline">
                         <input type="text" id="L_buyAmount" name="buyAmount" required="" lay-verify="number"
                         autocomplete="off" class="layui-input">
                     </div>
                     <div class="layui-form-mid layui-word-aux">
-                        <span class="x-red">*</span>
+                        <span class="x-red">*</span>卖出股票股数
                     </div>
                 </div>
                 <div class="layui-form-item">
-                    <label for="role" class="layui-form-label">
-                        <span class="x-red">*</span>买入要求
+                    <label for="index_zb" class="layui-form-label">
+                        <span class="x-red">*</span>卖出要求
                     </label>
                     <div class="layui-input-inline">
-                      <select name="role">
+                      <select name="index_zb">
                         <option value="">请选择要求</option>
-                        <option value="回调">回调</option>
-                        <option value="缩量">缩量</option>
-                        <option value="底背离">底背离</option>
+                        <option value="止盈">止盈</option>
+                        <option value="止损">止损</option>
+                        <option value="底背离">正常交易</option>
                       </select>
                     </div>
                 </div>
                 <div class="layui-form-item">
                     <label for="L_Price1" class="layui-form-label">
-                        <span class="x-red">*</span>买入一
+                        <span class="x-red">*</span>操作类型
                     </label>
                     <div class="layui-input-inline">
-                        <input type="text" id="L_Price1" name="Price1" required="" lay-verify="number"
-                        autocomplete="off" class="layui-input">
+                        <input type="text" value="卖出" id="L_Price1" name="state" required="" lay-verify="text"
+                        autocomplete="off" class="layui-input" disabled="disabled">
                     </div>
                     <div class="layui-form-mid layui-word-aux">
-                        <span class="x-red">*</span>点位
+                        <span class="x-red">*</span>成交状态：买入-卖出-强制平仓
                     </div>
-                </div>
-                <div class="layui-form-item">
-                    <label for="L_Price2" class="layui-form-label">
-                        <span class="x-red">*</span>买入二
-                    </label>
-                    <div class="layui-input-inline">
-                        <input type="text" id="L_Price2" name="Price2" required="" lay-verify="number"
-                        autocomplete="off" class="layui-input">
-                    </div>
-                    <div class="layui-form-mid layui-word-aux">
-                        <span class="x-red">*</span>点位
-                    </div>
-                </div>
+                </div>                
                 <div class="layui-form-item">
                     <label for="L_repass" class="layui-form-label">
                     </label>
                     <button  class="layui-btn" lay-filter="add" lay-submit="">
-                        买入
+                        卖出
                     </button>
                 </div>
             </form>
@@ -129,16 +129,40 @@
               form.on('submit(add)', function(data){
                 console.log(data);
                 //发异步，把数据提交给php
-                layer.alert("增加成功", {icon: 6},function () {
-                    // 获得frame索引
-                    var index = parent.layer.getFrameIndex(window.name);
-                    //关闭当前frame
-                    parent.layer.close(index);
-                });
+                console.log(data.field);
+                dataSend =data.field;
+                /*$.ajax({
+                    type:"POST",
+                    url:"php/insert_sell.php",
+                    data:{'buyAmount':dataSend.buyAmount,'dealPrice':dataSend.dealPrice,'index_xt':dataSend.index_xt,'index_zb':dataSend.index_zb,'positives':dataSend.positives,'priceLoss':dataSend.priceLoss,'shrinkage':dataSend.shrinkage,'smallK':dataSend.smallK,'stockCode':dataSend.stockCode,'stockName':dataSend.stockName,'upward':dataSend.upward,'daysNumber':dataSend.daysNumber,'enlarge':dataSend.enlarge,'middleUpward':dataSend.middleUpward,'rails':dataSend.rails,'vaginalLine':dataSend.vaginalLine,'stopFalling':dataSend.stopFalling},
+                    success:function(date_rcv){
+                        console.log(date_rcv);
+                        date_rcv = JSON.parse(date_rcv);
+                        //判断买入信息
+                        if (date_rcv['state']=='OK') {
+                            layer.alert("股票买入成功！", {
+                                title: "买入成功！",
+                                icon: 1
+                            });
+                            //setCookie("c_name", husername, 5);
+                            //window.location.href="index.html";
+                            //showLogin();
+                            console.log("买入完成"+date_rcv['error']);
+                            //$(this).resetForm(); // 提交后重置表单
+                            document.getElementById("form1").reset();
+                        } else {
+                            //取错误信息
+                            console.log("date[error]:"+date_rcv['error']);   
+                            layer.alert("失败_"+date_rcv['error'], {
+                                title: "买入失败！",
+                                icon: 2
+                            });
+                        }                     
+                    }
+                   
+                });*/               
                 return false;
               });
-              
-              
             });
         </script>
         <script>
