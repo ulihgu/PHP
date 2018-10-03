@@ -22,13 +22,6 @@
                     //$data = array("数据连接成功！");
                     $query = $sqlConnect->prepare($sql);
                     if ($query->execute()) {
-                        //存储到SESSION中
-                        //session_start(); // 如果不执行些方法，不能使用SESSION
-                        //$_SESSION['email'] = $email;
-                        //$_SESSION['name'] = $password;
-                        //存储到COOKIE
-                        //setcookie('email',$email)
-                        //$this->$errorArray = Array('error' =>null);
                         $this->$errorArray = array('error' => '正常:注册用户成功！','state'=>'OK');
                     } else {
                         $this->$errorArray = array('error' => '错误:注册用户失败！','state'=>'NO');

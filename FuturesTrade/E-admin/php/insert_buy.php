@@ -17,13 +17,14 @@
     $rails = $_POST['rails'];
     $vaginalLine = $_POST['vaginalLine'];
     $stopFalling = $_POST['stopFalling'];
+    $shares_money = $dealPrice*$buyAmount;
 
     $time = date('Y-m-d H:i:s');
 
     include "../../php/sqlConfig.php";
     
-    $sql = "INSERT INTO shares_stock(index_zb,index_xt,shares_amount,shares_price,positives,priceLoss,shrinkage,smallK,shares_code,shares_name,upward,daysNumber,enlarge,middleUpward,rails,vaginalLine,stopFalling,state,time)
-    VALUES('{$index_zb}','{$index_xt}','{$buyAmount}','{$dealPrice}','{$positives}','{$priceLoss}','{$shrinkage}','{$smallK}','{$stockCode}','{$stockName}','{$upward}','{$daysNumber}','{$enlarge}','{$middleUpward}','{$rails}','{$vaginalLine}','{$stopFalling}','卖入','{$time}')";
+    $sql = "INSERT INTO shares_stock(shares_money,index_zb,index_xt,shares_amount,shares_price,positives,priceLoss,shrinkage,smallK,shares_code,shares_name,upward,daysNumber,enlarge,middleUpward,rails,vaginalLine,stopFalling,state,time)
+    VALUES('{$shares_money}','{$index_zb}','{$index_xt}','{$buyAmount}','{$dealPrice}','{$positives}','{$priceLoss}','{$shrinkage}','{$smallK}','{$stockCode}','{$stockName}','{$upward}','{$daysNumber}','{$enlarge}','{$middleUpward}','{$rails}','{$vaginalLine}','{$stopFalling}','卖入','{$time}')";
     $query = $sqlConnect->prepare($sql);    
     
     $arrs = array();

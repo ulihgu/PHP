@@ -17,8 +17,9 @@
     if($query->execute()){
         //卖出成功后，进行在交易明细表中插入成交记录
         $sql = "INSERT INTO shares_stock(index_zb,shares_amount,shares_price,shares_code,state,time)VALUES('{$index_zb}','{$buyAmount}','{$dealPrice}','{$stockCode}','{$state}','{$time}')";
-        $query = $sqlConnect->prepare($sql);
-        if($query->execute()){
+        $query = $sqlConnect->query($sql);
+        $rows = $query->fetch(PDO::FETCH_ASSOC);
+        if($rows){
             $arrs = array('error' =>'正常:卖出成功！','state'=>'OK');
         }
     }else{
