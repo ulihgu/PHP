@@ -10,12 +10,6 @@
  //查询所有用户数据
         function fetchData($sql)
             {       
-               /*  $mysql_server_name = 'cdb-7ccs7hos.bj.tencentcdb.com:10034';
-                $mysql_username = 'root';
-                $mysql_password = 'ulihgu21';
-                $mysql_database = 'mysqldatabase';
-                $dsn = 'mysql:host='.$mysql_server_name.';dbname='.$mysql_database.';';
-                $sqlConnect = new PDO($dsn, $mysql_username, $mysql_password); */
                 include "sqlConfig.php";
                 //连接数据库phpbos\mysql1\api.php
                 try{             
@@ -38,7 +32,7 @@
         }
 
 
-    $sql = "SELECT shares_code,shares_name,shares_price,shares_amount,priceLoss,time FROM shares_stock WHERE time >= '{$startTime}' AND time <= '{$endTime}'";       
+    $sql = "SELECT shares_code,shares_name,shares_price,shares_amount,priceLoss,time FROM shares_stock WHERE time >= '{$startTime}' AND time <= '{$endTime}' AND state='卖入'";       
     fetchData($sql);   
     //$startTime2 = strtotime($startTime);
     //$endTime2 = strtotime($endTime);

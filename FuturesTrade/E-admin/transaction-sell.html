@@ -44,11 +44,11 @@
                 </div>
             </div>
             <div class="layui-form-item">
-                <label for="L_dosage" class="layui-form-label">
+                <label for="L_inventory" class="layui-form-label">
                     <span class="x-red">*</span>库存量
                 </label>
                 <div class="layui-input-inline">
-                    <input type="text" value="10000" id="L_inventory" name="dosage" required="" lay-verify="text" autocomplete="off"
+                    <input type="text" value="0" id="L_inventory" name="inventory" required="" lay-verify="text" autocomplete="off"
                         class="layui-input" disabled="disabled">
                 </div>
                 <div class="layui-form-mid layui-word-aux">
@@ -56,11 +56,11 @@
                 </div>
             </div>
             <div class="layui-form-item">
-                <label for="L_buyAmount" class="layui-form-label">
+                <label for="L_sellAmount" class="layui-form-label">
                     <span class="x-red">*</span>卖出数量
                 </label>
                 <div class="layui-input-inline">
-                    <input type="text" id="L_buyAmount" name="buyAmount" required="" lay-verify="number" autocomplete="off" class="layui-input">
+                    <input type="text" id="L_sellAmount" name="sellAmount" required="" lay-verify="number" autocomplete="off" class="layui-input">
                 </div>
                 <div class="layui-form-mid layui-word-aux">
                     <span class="x-red">*</span>卖出股票股数
@@ -100,8 +100,8 @@
             </div>
             </form>
         </div>
-        <script src="./lib/layui/layui.js" charset="utf-8">
-        </script>
+        <script src="./js/jquery.min.js"></script>
+        <script src="./lib/layui/layui.js" charset="utf-8"></script>       
         <script src="./js/x-layui.js" charset="utf-8">
         </script>
         <script> 
@@ -179,29 +179,40 @@
                 //发异步，把数据提交给php
                 console.log(data.field);
                 dataSend =data.field;
+                if(dataSend.sellAmount>=dataSend.inventory){               
                 $.ajax({
                     type:"POST",
-                    url:"php/insert_sell.php",
-                    data:{'state':'0'},
+                    url:"php/sellOut.php",
+                    data:{'stockCode':dataSend.stockCode,'dealPrice':dataSend.dealPrice,'index_zb':dataSend.index_zb,'inventory':dataSend.inventory,'sellAmount':dataSend.sellAmount,'state':dataSend.state},
                     success:function(date_rcv){
-                        if(date_rcv.length>0){
-                            data = JSON.parse(date_rcv);
-                            console.log(date_rcv);
-                            date_rcv.forEach(function(x){
-                            //开始写入到表格中
-                            var costPrice = x.amountOfMoney/x.inventory;                          
-                            var profit =(costPrice*parseInt(x.inventory))-parseInt(x.amountOfMoney);
-                            var newtr = '<tr><td><input type="checkbox" value="1" name=""></td><td>'+x.id+'</td><td>'+x.stockName+'</td><td >'+x.stockCode+'</td><td >'+costPrice+'</td><td >'+x.inventory+'</td><td>'+x.amountOfMoney+'</td><td>'+profit+'</td><td class="td-manage"><a style="text-decoration:none" onclick="admin_stop(this,"10001")" href="javascript:;" title="停用"><i class="layui-icon">&#xe601;</i></a><a title="编辑" href="javascript:;" onclick="admin_edit("编辑","admin-edit.html","4","","510")"class="ml-5" style="text-decoration:none"><i class="layui-icon">&#xe642;</i></a><a title="删除" href="javascript:;" onclick="admin_del(this,"1")"style="text-decoration:none"><i class="layui-icon">&#xe640;</i></a></td></tr>';
-                            //结束
-                            $(".tbodytable").append(newtr);
-                             });
-                            $(".totalStock").html('共有数据：'+date_rcv.length+" 条");
-                       }else{
+                        date_rcv = JSON.parse(date_rcv);
                         console.log(date_rcv);
-                       }                    
+                        //判断买入信息
+                        if (date_rcv['state']=='OK') {
+                            layer.alert("股票卖出成功！", {
+                                title: "卖出成功！",
+                                icon: 1
+                            });
+                            console.log("卖出完成"+date_rcv['error']);
+                            document.getElementById("form1").reset();
+                        } else {
+                            //取错误信息
+                            console.log("date[error]:"+date_rcv['error']);   
+                            layer.alert("失败_"+date_rcv['error'], {
+                                title: "卖出失败！",
+                                icon: 2
+                            });
+                        }                      
                     }
                    
-                });             
+                }); 
+            }else{
+                layer.alert("卖出数量应该小于："+dataSend.inventory, {
+                    title: "股票卖出失败！",
+                    icon: 2
+                });
+                return false;
+            }            
                 return false;
               });
             });
