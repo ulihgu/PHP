@@ -143,79 +143,79 @@
                 layui.use(['form', 'layer'], function () {
                     $ = layui.jquery;
                     var form = layui.form()
-                        , layer = layui.layer;  
+                        , layer = layui.layer;
 
-              //监听选择“卖出股票”
-              form.on('select(index_stock)', function(data_stock){
-                /* console.log(data.value); */
-                var intxt =data_stock.value;
-                //检查选择中的股票编码，并添加对应的股票数量
-                data_loca.forEach(function (x) {
-                      if (intxt == x.stockCode) {
-                        $("#L_inventory").val(x.inventory);
-                    }
-                  });              
-                form.render('select');
-              });
-                     
-              //自定义验证规则
-              form.verify({
-                nikename: function(value){
-                  if(value.length < 5){
-                    return '昵称至少得5个字符啊';
-                  }
-                }
-                ,pass: [/(.+){6,12}$/, '密码必须6到12位']
-                ,repass: function(value){
-                    if($('#L_pass').val()!=$('#L_repass').val()){
-                        return '两次密码不一致';
-                    }
-                }
-              });
+                    //监听选择“卖出股票”
+                    form.on('select(index_stock)', function (data_stock) {
+                        /* console.log(data.value); */
+                        var intxt = data_stock.value;
+                        //检查选择中的股票编码，并添加对应的股票数量
+                        data_loca.forEach(function (x) {
+                            if (intxt == x.stockCode) {
+                                $("#L_inventory").val(x.inventory);
+                            }
+                        });
+                        form.render('select');
+                    });
 
-              //监听提交
-              form.on('submit(add)', function(data){
-                console.log(data);
-                //发异步，把数据提交给php
-                console.log(data.field);
-                dataSend =data.field;
-                if(dataSend.sellAmount>=dataSend.inventory){               
-                $.ajax({
-                    type:"POST",
-                    url:"php/sellOut.php",
-                    data:{'stockCode':dataSend.stockCode,'dealPrice':dataSend.dealPrice,'index_zb':dataSend.index_zb,'inventory':dataSend.inventory,'sellAmount':dataSend.sellAmount,'state':dataSend.state},
-                    success:function(date_rcv){
-                        date_rcv = JSON.parse(date_rcv);
-                        console.log(date_rcv);
-                        //判断买入信息
-                        if (date_rcv['state']=='OK') {
-                            layer.alert("股票卖出成功！", {
-                                title: "卖出成功！",
-                                icon: 1
+                    //自定义验证规则
+                    form.verify({
+                        nikename: function (value) {
+                            if (value.length < 5) {
+                                return '昵称至少得5个字符啊';
+                            }
+                        }
+                        , pass: [/(.+){6,12}$/, '密码必须6到12位']
+                        , repass: function (value) {
+                            if ($('#L_pass').val() != $('#L_repass').val()) {
+                                return '两次密码不一致';
+                            }
+                        }
+                    });
+
+                    //监听提交
+                    form.on('submit(add)', function (data) {
+                        console.log(data);
+                        //发异步，把数据提交给php
+                        console.log(data.field);
+                        dataSend = data.field;
+                        if (dataSend.sellAmount >= dataSend.inventory) {
+                            $.ajax({
+                                type: "POST",
+                                url: "php/sellOut.php",
+                                data: { 'stockCode': dataSend.stockCode, 'dealPrice': dataSend.dealPrice, 'index_zb': dataSend.index_zb, 'inventory': dataSend.inventory, 'sellAmount': dataSend.sellAmount, 'state': dataSend.state },
+                                success: function (date_rcv) {
+                                    date_rcv = JSON.parse(date_rcv);
+                                    console.log(date_rcv);
+                                    //判断买入信息
+                                    if (date_rcv['state'] == 'OK') {
+                                        layer.alert("股票卖出成功！", {
+                                            title: "卖出成功！",
+                                            icon: 1
+                                        });
+                                        console.log("卖出完成" + date_rcv['error']);
+                                        document.getElementById("form1").reset();
+                                    } else {
+                                        //取错误信息
+                                        console.log("date[error]:" + date_rcv['error']);
+                                        layer.alert("失败_" + date_rcv['error'], {
+                                            title: "卖出失败！",
+                                            icon: 2
+                                        });
+                                    }
+                                }
+
                             });
-                            console.log("卖出完成"+date_rcv['error']);
-                            document.getElementById("form1").reset();
                         } else {
-                            //取错误信息
-                            console.log("date[error]:"+date_rcv['error']);   
-                            layer.alert("失败_"+date_rcv['error'], {
-                                title: "卖出失败！",
+                            layer.alert("卖出数量应该小于：" + dataSend.inventory, {
+                                title: "股票卖出失败！",
                                 icon: 2
                             });
-                        }                      
-                    }
-                   
-                }); 
-            }else{
-                layer.alert("卖出数量应该小于："+dataSend.inventory, {
-                    title: "股票卖出失败！",
-                    icon: 2
+                            return false;
+                        }
+                        return false;
+                    });
                 });
-                return false;
-            }            
-                return false;
-              });
-            });
         </script>
         <script>
         var _hmt = _hmt || [];

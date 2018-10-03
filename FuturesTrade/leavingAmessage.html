@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="css/mystyle.css">
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <title>智能投顾</title>
+</head>
+
+<body onload="checKsession()">  
+  <nav class="navbar navbar-default">
+    <div class="container-fluid">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
+          aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+
+      </div>
+
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <a class="navbar-brand" href="index.html">首页</a>
+        <ul class="nav navbar-nav">
+          <li class="active">
+            <a href="dayIntroduction.html">当日计划
+              <span class="sr-only">(current)</span>
+            </a>
+          </li>
+          <li>
+            <a href="latestInformation.html">最新资讯</a>
+          </li>
+          <li>
+              <a href="Chart.html">数据统计</a>
+            </li>
+            <li>
+              <a href="leavingAmessage.html">留言(Leaving a message)</a>
+              </li>          
+        </ul>
+
+        <ul class="nav navbar-nav navbar-right">
+          <li>
+            <a id="loginreg" href="#" onclick="showLogin()">登录/注册</a>
+          </li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">个人信息
+              <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+              <li>
+                <a id="personalSettings" href="Construction.html">个人设置</a>
+              </li>
+              <li>
+                <a href="Construction.html">消息 <span class="badge">12</span> </a>
+              </li>
+              <li role="separator" class="divider"></li>
+              <li>
+                <a href="./home/login.html">后台管理</a>
+              </li>
+              <li role="separator" class="divider"></li>
+              <li>
+                <a id="hExit__" href="php/signOut.php">退出</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+      <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container-fluid -->
+  </nav>
+  <div class="row">
+    <div class="col-md-2 col-md-offset-2">
+      <img src="image/log.jpg" alt="" width="180" height="150">
+    </div>
+    <div class="col-md-8">
+      <h1><span class="label label-default">网站留言-Leaving a message</span></h1>
+      <p class="">
+        有什么意见和想法，可以通过留言记录下您的反馈，多谢！ QQ:17198419 联系电话：18500363515。
+      </p>
+    </div>
+  </div>
+  <hr>
+  <form class="layui-form">
+    <div class="layui-form-item layui-form-text">
+      <div class="layui-input-block">
+        <textarea name="amessage" placeholder="请输入内容" class="layui-textarea" style="margin-left: 80px;margin-top: 0px; margin-bottom: 0px; height: 150px; width: 90%;"></textarea>
+      </div>
+    </div>
+    <div class="layui-form-item" style="overflow: hidden;margin-left: 80px;">
+      <div class="layui-input-block layui-input-right">
+        <button class="layui-btn btn btn-primary" lay-submit="" lay-filter="addAmessage">发表</button>
+      </div>
+      <div class="layadmin-messag-icon">
+        <a href="javascript:;"><i class="layui-icon layui-icon-face-smile-b"></i></a>
+        <a href="javascript:;"><i class="layui-icon layui-icon-picture"></i></a>
+        <a href="javascript:;"><i class="layui-icon layui-icon-link"></i></a>
+      </div>
+    </div>
+  </form>
+  <div class="wrapper">
+    <div class="messageBoxs">
+      <img src="image/usermsg.png" alt="">
+      <a href="">超级管理员(administrator)</a>
+      <p class="floor">沙发</p>
+      <br>
+      <p>不错继续努力加油-发展哦！沙发我占了，不用再想了。</p>
+      <p class="ptexttime">2017-10-03 00:00:00</p>
+    </div>
+  </div>
+  <div id="loginbox" class="form-group">
+    <div class="login-item "><input type="type" id="textUserName" placeholder="油箱" /></div>
+    <div class="login-item "><input type="password" id="textPassword" placeholder="密码" /></div>
+    <div class="login-item "><a id="loging" href="javascript:;" onclick="loginFun()">登录</a></div>
+    <div class="login-item "><a id="signup" href="signup.html">注册</a></div>
+    <h3></h3>
+  </div>
+  <script src="js/jquery-3.3.1.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/layer.js"></script>
+  <script src="./E-admin/lib/layui/layui.js" charset="utf-8"></script>       
+  <script src="./E-admin/js/x-layui.js" charset="utf-8"></script>
+  <script src="js/tools.js"></script>
+  <script>
+      $(document).ready(function () { 
+        $.ajax({
+          type:"POST",
+          url:"php/messageAdd.php",
+          data:{'state':'1'},
+          success:function(date_rcv){
+            date_rcv = JSON.parse(date_rcv);
+            console.log(date_rcv);
+            if (date_rcv.length > 0) {
+              $(".wrapper").empty();
+              var newtr = '<div class="messageBoxs"><img src="image/usermsg.png" alt=""><a href="">超级管理员(administrator)</a><p class="floor">沙发</p><br><p>不错继续努力加油-发展哦！沙发我占了，不用再想了。</p><p class="ptexttime">更新：2017-10-03 00:00:00</p></div>';
+              $(".wrapper").append(newtr);
+              var i = 1;
+              date_rcv.forEach(function (x) {
+                //开始添加到显示中
+                var newtr = '<div class="messageBoxs"><img src="image/usermsg.png" alt=""><a href="">' + x.username + '</a><p class="floor">' + i + '楼</p><br><p>' + x.amessage + '</p><p class="ptexttime">更新：' + x.time + '</p></div>';
+                //结束
+                $(".wrapper").append(newtr);
+                i++;
+              });
+            }
+          }
+        });
+      });
+    //layui处理过程
+    layui.use(['form', 'layer'], function () {
+        $ = layui.jquery;
+        var form = layui.form()
+          , layer = layui.layer;
+
+        //监听提交
+        form.on('submit(addAmessage)', function (data) {
+          //发异步，把数据提交给php
+          console.log(data.field);
+          dataSend = data.field;
+          if (dataSend.amessage.length > 5){
+            $.ajax({
+                type:"POST",
+                url:"php/messageAdd.php",
+                data:{'amessage':dataSend.amessage,'state':'0'},
+                success:function(date_rcv){
+                    date_rcv = JSON.parse(date_rcv);
+                    console.log(date_rcv);
+                    if (date_rcv['state']=='ON') {
+                      console.log(data);
+                      //取错误信息
+                      console.log("date[error]:" + date_rcv['error']);
+                      layer.alert("失败_" + date_rcv['error'], {
+                        title: "留言失败！",
+                        icon: 2
+                      });
+                      return false;
+                    }else{
+                      if (date_rcv.length > 0) {
+                        $(".wrapper").empty();
+                        var newtr = '<div class="messageBoxs"><img src="image/usermsg.png" alt=""><a href="">超级管理员(administrator)</a><p class="floor">沙发</p><br><p>不错继续努力加油-发展哦！沙发我占了，不用再想了。</p><p class="ptexttime">更新：2017-10-03 00:00:00</p></div>';
+                        $(".wrapper").append(newtr);
+                        var i=1;
+                        date_rcv.forEach(function (x) {
+                          //开始添加到显示中
+                          var newtr = '<div class="messageBoxs"><img src="image/usermsg.png" alt=""><a href="">'+x.username+'</a><p class="floor">'+i+'楼</p><br><p>'+x.amessage+'</p><p class="ptexttime">更新：'+x.time+'</p></div>';
+                          //结束
+                          $(".wrapper").append(newtr);
+                          i++;
+                        });
+                        //$(".totalStock").html('共有数据：' + data.length + " 条");
+                        layer.alert("留言保存成功！", {
+                          title: "留言提示！",
+                          icon: 1
+                        });
+                        $('textarea').val("");
+                      } else {
+                        console.log(data);
+                        //取错误信息
+                        console.log("date[error]:" + date_rcv['error']);
+                        layer.alert("失败_" + date_rcv['error'], {
+                          title: "留言失败！",
+                          icon: 2
+                        });
+                      }    
+                    }                    
+                }               
+            });
+          } else {
+            layer.alert("留言不能小于: 6 当前：" + dataSend.amessage.length, {
+              title: "留言失败！",
+              icon: 2
+            });
+          }
+          return false;
+        });
+      });
+  </script>
+</body>
+
+</html>
