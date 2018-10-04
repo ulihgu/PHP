@@ -106,14 +106,14 @@
     </div>
   </form>
   <div class="wrapper">
-    <div class="messageBoxs">
+   <!--  <div class="messageBoxs">
       <img src="image/usermsg.png" alt="">
       <a href="">超级管理员(administrator)</a>
       <p class="floor">沙发</p>
       <br>
       <p>不错继续努力加油-发展哦！沙发我占了，不用再想了。</p>
       <p class="ptexttime">2017-10-03 00:00:00</p>
-    </div>
+    </div> -->
   </div>
   <div id="loginbox" class="form-group">
     <div class="login-item "><input type="type" id="textUserName" placeholder="油箱" /></div>
@@ -139,7 +139,7 @@
             console.log(date_rcv);
             if (date_rcv.length > 0) {
               $(".wrapper").empty();
-              var newtr = '<div class="messageBoxs"><img src="image/usermsg.png" alt=""><a href="">超级管理员(administrator)</a><p class="floor">沙发</p><br><p>不错继续努力加油-发展哦！沙发我占了，不用再想了。</p><p class="ptexttime">更新：2017-10-03 00:00:00</p></div>';
+              var newtr = '<div class="messageBoxs"><img src="image/administrator.png" alt=""><a href="">超级管理员(administrator)</a><p class="floor">沙发</p><br><p>不错继续努力加油-发展哦！沙发我占了，不用再想了。</p><p class="ptexttime">更新：2017-10-03 00:00:00</p></div>';
               $(".wrapper").append(newtr);
               var i = 1;
               date_rcv.forEach(function (x) {
